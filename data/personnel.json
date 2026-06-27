@@ -688,7 +688,7 @@
         "lastName": "Hydra",
         "status": "active",
         "elementId": 12,
-        "role": "Lead",
+        "role": "Flight Lead",
         "enlisted": "2024-09-15",
         "discordId": "purple_hydra"
     },
@@ -699,7 +699,7 @@
         "lastName": "Weste",
         "status": "active",
         "elementId": 12,
-        "role": "2IC",
+        "role": "Flight 2IC",
         "enlisted": "2024-11-12",
         "discordId": "westernpilot26"
     },
@@ -710,7 +710,7 @@
         "lastName": "Raven",
         "status": "active",
         "elementId": 13,
-        "role": "2IC",
+        "role": "Flight 2IC",
         "enlisted": "2026-01-29",
         "discordId": "raven_she_her"
     },
@@ -721,7 +721,7 @@
         "lastName": "Rocky",
         "status": "active",
         "elementId": 12,
-        "role": "Member",
+        "role": "Aviator",
         "enlisted": "2025-08-04",
         "discordId": "jackt2210"
     },
@@ -732,7 +732,7 @@
         "lastName": "Skarin",
         "status": "active",
         "elementId": 12,
-        "role": "Member",
+        "role": "Aviator",
         "enlisted": "2026-01-18",
         "discordId": "skarin4484"
     },
@@ -743,7 +743,7 @@
         "lastName": "Luc",
         "status": "active",
         "elementId": 13,
-        "role": "Member",
+        "role": "Aviator",
         "enlisted": "2025-12-29",
         "discordId": "luc234866"
     },
@@ -754,7 +754,7 @@
         "lastName": "Firebird",
         "status": "active",
         "elementId": 13,
-        "role": "Member",
+        "role": "Aviator",
         "enlisted": "2026-04-17",
         "discordId": "reaper_885"
     }
