@@ -174,5 +174,104 @@
         "role": "Corpsman",
         "enlisted": "2026-04-08",
         "discordId": "aliceisalone"
+    },
+    {
+        "id": 17,
+        "rankId": 16,
+        "firstName": "B",
+        "lastName": "BMO",
+        "status": "active",
+        "elementId": 4,
+        "role": "SL",
+        "enlisted": "2024-11-16",
+        "discordId": "bmo070544"
+    },
+    {
+        "id": 18,
+        "rankId": 10,
+        "firstName": "J",
+        "lastName": "Jo",
+        "status": "active",
+        "elementId": 4,
+        "role": "ASL",
+        "enlisted": "2024-11-16",
+        "discordId": "vokkun"
+    },
+    {
+        "id": 19,
+        "rankId": 9,
+        "firstName": "G",
+        "lastName": "Gossard",
+        "status": "active",
+        "elementId": 4,
+        "role": "ODST",
+        "enlisted": "2024-11-16",
+        "discordId": "gossard"
+    },
+    {
+        "id": 20,
+        "rankId": 9,
+        "firstName": "T",
+        "lastName": "Damberg",
+        "status": "active",
+        "elementId": 4,
+        "role": "ODST",
+        "enlisted": "2025-01-14",
+        "discordId": "damberg1"
+    },
+    {
+        "id": 21,
+        "rankId": 7,
+        "firstName": "J",
+        "lastName": "Anselm",
+        "status": "active",
+        "elementId": 4,
+        "role": "ODST",
+        "enlisted": "2025-11-29",
+        "discordId": "es177"
+    },
+    {
+        "id": 22,
+        "rankId": 3,
+        "firstName": "A",
+        "lastName": "Reepper",
+        "status": "active",
+        "elementId": 4,
+        "role": "ODST",
+        "enlisted": "2025-12-26",
+        "discordId": "reepper."
+    },
+    {
+        "id": 23,
+        "rankId": 5,
+        "firstName": "K",
+        "lastName": "Kev",
+        "status": "active",
+        "elementId": 4,
+        "role": "ODST",
+        "enlisted": "2026-02-02",
+        "discordId": "sponks99"
+    },
+    {
+        "id": 24,
+        "rankId": 26,
+        "firstName": "A",
+        "lastName": "Howells",
+        "status": "active",
+        "elementId": 4,
+        "role": "Corpsman",
+        "enlisted": "2025-12-26",
+        "discordId": "lenooccar"
+    },
+    {
+        "id": 25,
+        "rankId": 24,
+        "firstName": "L",
+        "lastName": "Lemo",
+        "status": "active",
+        "elementId": 4,
+        "role": "Corpsman",
+        "enlisted": "2026-01-05",
+        "discordId": "lemo"
     }
 ]
