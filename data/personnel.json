@@ -757,5 +757,126 @@
         "role": "Aviator",
         "enlisted": "2026-04-17",
         "discordId": "reaper_885"
+    },
+    {
+        "id": 70,
+        "rankId": 19,
+        "firstName": null,
+        "lastName": "Sig",
+        "status": "active",
+        "elementId": 14,
+        "role": "Command",
+        "enlisted": "2024-11-11",
+        "discordId": "makotheshark"
+    },
+    {
+        "id": 71,
+        "rankId": 22,
+        "firstName": "C",
+        "lastName": "Jewel",
+        "status": "active",
+        "elementId": 15,
+        "role": "Section Commander",
+        "enlisted": "2024-11-17",
+        "discordId": "__k1"
+    },
+    {
+        "id": 72,
+        "rankId": 14,
+        "firstName": "Y",
+        "lastName": "Dadecoy",
+        "status": "active",
+        "elementId": 16,
+        "role": "Section Commander",
+        "enlisted": "2025-03-03",
+        "discordId": "csm_dadecoy"
+    },
+    {
+        "id": 73,
+        "rankId": 12,
+        "firstName": null,
+        "lastName": "Monarch",
+        "status": "active",
+        "elementId": 16,
+        "role": "Sr Engineer",
+        "enlisted": "2024-11-11",
+        "discordId": "kilesov117"
+    },
+    {
+        "id": 74,
+        "rankId": 9,
+        "firstName": "J",
+        "lastName": "Grizz",
+        "status": "active",
+        "elementId": 15,
+        "role": "Engineer",
+        "enlisted": "2024-09-15",
+        "discordId": "grizzlymite73"
+    },
+    {
+        "id": 75,
+        "rankId": 5,
+        "firstName": null,
+        "lastName": "Cash",
+        "status": "active",
+        "elementId": 16,
+        "role": "Engineer",
+        "enlisted": "2025-04-01",
+        "discordId": "c45c45"
+    },
+    {
+        "id": 76,
+        "rankId": 16,
+        "firstName": null,
+        "lastName": "Bonewheel",
+        "status": "active",
+        "elementId": 18,
+        "role": "SL",
+        "enlisted": "2024-11-11",
+        "discordId": "bonewheelthe3rd"
+    },
+    {
+        "id": 77,
+        "rankId": 9,
+        "firstName": "R",
+        "lastName": "Witte",
+        "status": "active",
+        "elementId": 18,
+        "role": "ASL",
+        "enlisted": "2025-05-13",
+        "discordId": "blobfish4713"
+    },
+    {
+        "id": 78,
+        "rankId": 40,
+        "firstName": null,
+        "lastName": "Cola",
+        "status": "active",
+        "elementId": 18,
+        "role": "Medic ODST",
+        "enlisted": "2024-11-11",
+        "discordId": "cola7973"
+    },
+    {
+        "id": 79,
+        "rankId": 30,
+        "firstName": null,
+        "lastName": "Desk",
+        "status": "active",
+        "elementId": 18,
+        "role": "Corpsman",
+        "enlisted": "2024-11-11",
+        "discordId": "itzadesk"
+    },
+    {
+        "id": 80,
+        "rankId": 25,
+        "firstName": "A",
+        "lastName": "Owliette",
+        "status": "active",
+        "elementId": 18,
+        "role": "Corpsman",
+        "enlisted": "2026-02-04",
+        "discordId": "owliettee"
     }
 ]
