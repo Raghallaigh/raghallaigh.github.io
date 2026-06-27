@@ -535,10 +535,10 @@
                         const p = assigned[roleIndex[role]];
                         const rank = getRank(p.rankId);
                         const displayName = `${p.firstName.charAt(0)}. ${p.lastName}`;
+                        const rankName = `${rank.abbreviation} ${displayName}`;
                         html += `<li class="billet-item filled">
                                     <span class="billet-role">${role}</span>
-                                    <span class="billet-rankname">${rank.abbreviation}</span>
-                                    <span class="billet-rankname">${displayName}</span>
+                                    <span class="billet-rankname">${rankName}</span>
                                 </li>`;
                         roleIndex[role]++;
                     } else {
