@@ -505,6 +505,11 @@
             return map[status] || 'Inactive';
         }
 
+        function fomatDisplayName(first, last) {
+            const initial = first && first.length > 0 ? first.charAt(0) : '';
+            return initial ? `${initial}. ${last}` : last;
+        }
+
         // ============================================================
         //  RENDER FUNCTIONS
         // ============================================================
@@ -534,7 +539,7 @@
                     if (roleIndex[role] < assigned.length) {
                         const p = assigned[roleIndex[role]];
                         const rank = getRank(p.rankId);
-                        const displayName = `${p.firstName.charAt(0)}. ${p.lastName}`;
+                        const displayName = formatDisplayName(p.firstName, p.lastName);
                         const rankName = `${rank.abbreviation} ${displayName}`;
                         html += `<li class="billet-item filled">
                                     <span class="billet-role">${role}</span>
