@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>ORBAT Admin</title>
+    <style>
+        body { font-family: sans-serif; background: #1a1a1a; color: #eee; padding: 1rem; }
+        .data-section { margin: 2rem 0; border: 1px solid #444; padding: 1rem; }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { border: 1px solid #444; padding: 0.3rem; }
+        input, select, button { background: #333; color: #eee; border: 1px solid #555; padding: 0.2rem 0.5rem; }
+        .actions { display: flex; gap: 0.5rem; }
+        .edit-form { display: none; margin-top: 0.5rem; }
+        .download-btn { background: #f1c232; color: #000; padding: 0.5rem 1rem; margin: 0.5rem 0; border: none; cursor: pointer; }
+    </style>
+</head>
+<body>
+
+    <h1>ORBAT Data Admin</h1>
+    <p>Edit data, then download the updated JSON files and replace them in your <code>data/</code> folder.</p>
+
+    <!-- We'll load data here -->
+    <div id="app">
+        <div id="loading">Loading...</div>
+    </div>
+
+    <script>
+        // In a real implementation, these would be fetched from your JSON files.
+        // For this example, we'll use placeholder data.
+        let ranks = [];
+        let elements = [];
+        let personnel = [];
+
+        // Utility: get next ID
+        function nextId(arr) {
+            if (arr.length === 0) return 1;
+            return Math.max(...arr.map(item => item.id)) + 1;
+        }
+
+        // Render all tables
+        function render() {
+            const app = document.getElementById('app');
+            app.innerHTML = `
+                <div id="rank-section" class="data-section">
+                    <h2>Ranks</h2>
+                    ${renderTable('ranks', ranks, rankFields)}
+                    ${renderAddForm('ranks', rankFields)}
+                    <button class="download-btn" onclick="downloadJSON('ranks')">Download ranks.json</button>
+                </div>
+                <div id="element-section" class="data-section">
+                    <h2>Elements</h2>
+                    ${renderTable('elements', elements, elementFields)}
+                    ${renderAddForm('elements', elementFields)}
+                    <button class="download-btn" onclick="downloadJSON('elements')">Download elements.json</button>
+                </div>
+                <div id="personnel-section" class="data-section">
+                    <h2>Personnel</h2>
+                    ${renderTable('personnel', personnel, personnelFields)}
+                    ${renderAddForm('personnel', personnelFields)}
+                    <button class="download-btn" onclick="downloadJSON('personnel')">Download personnel.json</button>
+                </div>
+            `;
+        }
+
+        // Field definitions – used to generate forms and table columns
+        const rankFields = [
+            { key: 'id', label: 'ID', type: 'number', required: true },
+            { key: 'abbreviation', label: 'Abbrev', type: 'text', required: true },
+            { key: 'fullName', label: 'Full Name', type: 'text', required: true },
+            { key: 'type', label: 'Type', type: 'text', required: true },
+            { key: 'order', label: 'Order', type: 'number', required: true }
+        ];
+
+        const elementFields = [
+            { key: 'id', label: 'ID', type: 'number', required: true },
+            { key: 'name', label: 'Name', type: 'text', required: true },
+            { key: 'type', label: 'Type', type: 'text', required: true },
+            { key: 'parentId', label: 'Parent ID', type: 'number' },
+            { key: 'templateKey', label: 'Template Key', type: 'text' }
+        ];
+
+        const personnelFields = [
+            { key: 'id', label: 'ID', type: 'number', required: true },
+            { key: 'rankId', label: 'Rank ID', type: 'number', required: true },
+            { key: 'firstName', label: 'First Name', type: 'text', required: true },
+            { key: 'lastName', label: 'Last Name', type: 'text', required: true },
+            { key: 'status', label: 'Status', type: 'text', required: true },
+            { key: 'elementId', label: 'Element ID', type: 'number', required: true },
+            { key: 'role', label: 'Role', type: 'text', required: true }
+        ];
+
+        // Render a table (data and edit/delete buttons)
+        function renderTable(type, data, fields) {
+            if (data.length === 0) return '<p>No data.</p>';
+            let html = `<table><thead><tr>`;
+            fields.forEach(f => html += `<th>${f.label}</th>`);
+            html += `<th>Actions</th></tr></thead><tbody>`;
+            data.forEach((item, index) => {
+                html += `<tr id="${type}-row-${index}">`;
+                fields.forEach(f => html += `<td>${item[f.key] ?? ''}</td>`);
+                html += `<td>
+                            <button onclick="editItem('${type}', ${index})">Edit</button>
+                            <button onclick="deleteItem('${type}', ${index})">Delete</button>
+                        </td></tr>`;
+                // Optionally, an inline edit form could be shown here
+            });
+            html += `</tbody></table>`;
+            return html;
+        }
+
+        // Add form
+        function renderAddForm(type, fields) {
+            let html = `<form onsubmit="addItem('${type}'); return false;" style="margin-top:1rem;">`;
+            fields.forEach(f => {
+                html += `<label>${f.label}: <input type="${f.type}" name="${f.key}" ${f.required ? 'required' : ''} /></label> `;
+            });
+            html += `<button type="submit">Add</button></form>`;
+            return html;
+        }
+
+        // Global data storage
+        const dataStore = { ranks, elements, personnel };
+
+        // Add item
+        function addItem(type) {
+            const form = document.querySelector(`#${type}-section form`);
+            const inputs = form.querySelectorAll('input');
+            const newItem = {};
+            const fields = type === 'ranks' ? rankFields : (type === 'elements' ? elementFields : personnelFields);
+            fields.forEach((f, i) => {
+                const val = inputs[i].value;
+                newItem[f.key] = f.type === 'number' ? Number(val) : val;
+            });
+            // Ensure ID is unique; if user enters an existing ID, we could warn.
+            const arr = dataStore[type];
+            if (arr.some(item => item.id === newItem.id)) {
+                alert('ID already exists. Please use a unique ID.');
+                return;
+            }
+            arr.push(newItem);
+            render();
+        }
+
+        // Delete item
+        function deleteItem(type, index) {
+            if (!confirm('Delete this item?')) return;
+            dataStore[type].splice(index, 1);
+            render();
+        }
+
+        // Edit item (simple: just load into a form at the top – we'll implement a quick version)
+        // For simplicity, we'll use a prompt-based edit, but you can build a modal.
+        function editItem(type, index) {
+            const arr = dataStore[type];
+            const item = arr[index];
+            const fields = type === 'ranks' ? rankFields : (type === 'elements' ? elementFields : personnelFields);
+            // Use prompt for each field – crude but functional
+            fields.forEach(f => {
+                const newVal = prompt(`Edit ${f.label} (current: ${item[f.key]})`, item[f.key]);
+                if (newVal !== null) {
+                    item[f.key] = f.type === 'number' ? Number(newVal) : newVal;
+                }
+            });
+            render();
+        }
+
+        // Download JSON
+        function downloadJSON(type) {
+            const data = dataStore[type];
+            const json = JSON.stringify(data, null, 2);
+            const blob = new Blob([json], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `${type}.json`;
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+
+        // Load data – in practice, use fetch
+        async function loadData() {
+            try {
+                // Simulate loading; replace with actual fetch calls
+                // const ranksRes = await fetch('data/ranks.json');
+                // const elementsRes = await fetch('data/elements.json');
+                // const personnelRes = await fetch('data/personnel.json');
+                // ranks = await ranksRes.json();
+                // elements = await elementsRes.json();
+                // personnel = await personnelRes.json();
+
+                // For demo, we'll use sample data (since we don't have the files here)
+                ranks = [
+                    { id: 1, abbreviation: 'PVT', fullName: 'Private', order: 2 },
+                    { id: 2, abbreviation: 'CPL', fullName: 'Corporal', order: 11 }
+                ];
+                elements = [
+                    { id: 1, name: 'Vanguard Company', type: 'command', parentId: null }
+                ];
+                personnel = [
+                    { id: 1, rankId: 2, firstName: 'G', lastName: 'Grand', status: 'active', elementId: 1, role: 'CO' }
+                ];
+
+                dataStore.ranks = ranks;
+                dataStore.elements = elements;
+                dataStore.personnel = personnel;
+
+                render();
+            } catch (e) {
+                document.getElementById('app').innerHTML = `<div class="loading">Error loading data: ${e.message}</div>`;
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', loadData);
+    </script>
+</body>
+</html>
