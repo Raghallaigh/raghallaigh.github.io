@@ -543,7 +543,7 @@
                         const p = assigned[roleIndex[role]];
                         const rank = getRank(p.rankId);
                         const displayName = formatDisplayName(p.firstName, p.lastName);
-                        const rankName = `${rank.abbreviation} ${displayName}`;
+                        const rankName = `${rank.abbreviation}. ${displayName}`;
                         html += `<li class="billet-item filled">
                                     <span class="billet-role">${role}</span>
                                     <span class="billet-rankname">${rankName}</span>
