@@ -7,7 +7,8 @@
         "status": "active",
         "elementId": 1,
         "role": "CO",
-        "enlisted": "2024-09-10"
+        "enlisted": "2024-09-10",
+        "discordId": "grandgamerlou"
     },
     {
         "id": 2,
@@ -17,7 +18,8 @@
         "status": "active",
         "elementId": 1,
         "role": "XO",
-        "enlisted": "2025-02-11"
+        "enlisted": "2025-02-11",
+        "discordId": "conqueror5555"
     },
     {
         "id": 3,
@@ -27,7 +29,8 @@
         "status": "active",
         "elementId": 0,
         "role": "Templar Actual",
-        "enlisted": "2025-01-04"
+        "enlisted": "2025-01-04",
+        "discordId": "glorifiedholyfire"
     },
     {
         "id": 4,
@@ -37,7 +40,8 @@
         "status": "active",
         "elementId": 0,
         "role": "Templar",
-        "enlisted": "2026-01-13"
+        "enlisted": "2026-01-13",
+        "discordId": "solar_drifter"
     },
     {
         "id": 5,
@@ -47,7 +51,8 @@
         "status": "active",
         "elementId": 0,
         "role": "Templar",
-        "enlisted": "2026-05-16"
+        "enlisted": "2026-05-16",
+        "discordId": "medicus_247"
     },
     {
         "id": 6,
@@ -57,6 +62,95 @@
         "status": "active",
         "elementId": 2,
         "role": "Command",
-        "enlisted": "2024-11-08"
+        "enlisted": "2024-11-08",
+        "discordId": "noble1004"
+    },
+    {
+        "id": 7,
+        "rankId": 11,
+        "firstName": "M",
+        "lastName": "Rags",
+        "status": "active",
+        "elementId": 2,
+        "role": "RTO",
+        "enlisted": "2025-09-21",
+        "discordId": "raghallaigh"
+    },
+    {
+        "id": 8,
+        "rankId": 30,
+        "firstName": "C",
+        "lastName": "Cancha",
+        "status": "active",
+        "elementId": 2,
+        "role": "Corpsman",
+        "enlisted": "2025-01-05",
+        "discordId": "canchamar"
+    },
+    {
+        "id": 9,
+        "rankId": 41,
+        "firstName": "J",
+        "lastName": "Legacy",
+        "status": "active",
+        "elementId": 0,
+        "role": "Templar",
+        "enlisted": "2026-05-16",
+        "discordId": "whiplash1_1"
+    },
+    {
+        "id": 10,
+        "rankId": 10,
+        "firstName": "J",
+        "lastName": "Juniper",
+        "status": "active",
+        "elementId": 3,
+        "role": "SL",
+        "enlisted": "2024-10-28",
+        "discordId": "shadeofjuniper."
+    },
+    {
+        "id": 11,
+        "rankId": 12,
+        "firstName": "C",
+        "lastName": "Dancer",
+        "status": "active",
+        "elementId": 3,
+        "role": "ASL",
+        "enlisted": "2024-11-16",
+        "discordId": "backgrounddancer"
+    },
+    {
+        "id": 12,
+        "rankId": 2,
+        "firstName": "R",
+        "lastName": "Naomi",
+        "status": "active",
+        "elementId": 3,
+        "role": "RTO",
+        "enlisted": "2026-04-05",
+        "discordId": "samikami"
+    },
+    {
+        "id": 13,
+        "rankId": 4,
+        "firstName": "J",
+        "lastName": "Born",
+        "status": "active",
+        "elementId": 3,
+        "role": "ODST",
+        "enlisted": "2026-04-08",
+        "discordId": "borntobealoner"
+    },
+    {
+        "id": 14,
+        "rankId": 2,
+        "firstName": "T",
+        "lastName": "Willhelm",
+        "status": "active",
+        "elementId": 3,
+        "role": "ODST",
+        "enlisted": "2026-04-19",
+        "discordId": "guillume_159"
     }
 ]
