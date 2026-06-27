@@ -591,7 +591,7 @@
                 const rank = getRank(p.rankId);
                 const el = getElement(p.elementId);
                 const sClass = statusClass(p.status);
-                const displayName = `${p.firstName.charAt(0)}. ${p.lastName}`;
+                const displayName = formatDisplayName(p.firstName, p.lastName);
                 html += `<tr>
                             <td><span class="rank-badge">${rank.abbreviation}</span></td>
                             <td>${displayName}</td>
