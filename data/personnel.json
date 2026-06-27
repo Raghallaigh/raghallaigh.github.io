@@ -25,8 +25,38 @@
         "firstName": "Pope",
         "lastName": "Raptor",
         "status": "active",
-        "elementId": null,
-        "role": null,
+        "elementId": 0,
+        "role": "Templar Actual",
         "enlisted": "2025-01-04"
+    },
+    {
+        "id": 4,
+        "rankId": 44,
+        "firstName": "S",
+        "lastName": "Cole",
+        "status": "active",
+        "elementId": 0,
+        "role": "Templar",
+        "enlisted": "2026-01-13"
+    },
+    {
+        "id": 5,
+        "rankId": 41,
+        "firstName": "",
+        "lastName": "Mitchell",
+        "status": "active",
+        "elementId": 0,
+        "role": "Templar",
+        "enlisted": "2026-05-16"
+    },
+    {
+        "id": 6,
+        "rankId": 20,
+        "firstName": "J",
+        "lastName": "Noble",
+        "status": "active",
+        "elementId": 2,
+        "role": "command",
+        "enlisted": "2024-11-08"
     }
 ]
