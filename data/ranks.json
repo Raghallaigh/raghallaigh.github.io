@@ -1,0 +1,272 @@
+[
+    {
+        "id": 1,
+        "abbreviation": "RCT",
+        "fullName": "Recruit",
+        "order": 1
+    },
+    {
+        "id": 2,
+        "abbreviation": "PVT",
+        "fullName": "Private",
+        "order": 2
+    },
+    {
+        "id": 3,
+        "abbreviation": "PV2",
+        "fullName": "Private Second Class",
+        "order": 3
+    },
+    {
+        "id": 4,
+        "abbreviation": "PFC",
+        "fullName": "Private First Class",
+        "order": 4
+    },
+    {
+        "id": 5,
+        "abbreviation": "WO1",
+        "fullName": "Warrant Officer 1",
+        "order": 5
+    },
+    {
+        "id": 6,
+        "abbreviation": "WO2",
+        "fullName": "Warrant Officer 2",
+        "order": 6
+    },
+    {
+        "id": 7,
+        "abbreviation": "WO3",
+        "fullName": "Warrant Officer 3",
+        "order": 7
+    },
+    {
+        "id": 8,
+        "abbreviation": "WO4",
+        "fullName": "Warrant Officer 4",
+        "order": 8
+    },
+    {
+        "id": 9,
+        "abbreviation": "CWO",
+        "fullName": "Chief Warrant Officer",
+        "order": 9
+    },
+    {
+        "id": 10,
+        "abbreviation": "LCPL",
+        "fullName": "Lance Corporal",
+        "order": 10
+    },
+    {
+        "id": 11,
+        "abbreviation": "CPL",
+        "fullName": "Corporal",
+        "order": 11
+    },
+    {
+        "id": 12,
+        "abbreviation": "SGT",
+        "fullName": "Sergeant",
+        "order": 12
+    },
+    {
+        "id": 13,
+        "abbreviation": "SSG",
+        "fullName": "Staff Sergeant",
+        "order": 13
+    },
+    {
+        "id": 14,
+        "abbreviation": "GYSGT",
+        "fullName": "Gunnery Sergeant",
+        "order": 14
+    },
+    {
+        "id": 15,
+        "abbreviation": "MSGT",
+        "fullName": "Master Sergeant",
+        "order": 15
+    },
+    {
+        "id": 16,
+        "abbreviation": "SGM",
+        "fullName": "Sergeant Major",
+        "order": 16
+    },
+    {
+        "id": 17,
+        "abbreviation": "CSM",
+        "fullName": "Command Sergeant Major",
+        "order": 17
+    },
+    {
+        "id": 18,
+        "abbreviation": "2LT",
+        "fullName": "Second Lieutenant",
+        "order": 18
+    },
+    {
+        "id": 19,
+        "abbreviation": "1LT",
+        "fullName": "First Lieutenant",
+        "order": 19
+    },
+    {
+        "id": 20,
+        "abbreviation": "CPT",
+        "fullName": "Captain",
+        "order": 20
+    },
+    {
+        "id": 21,
+        "abbreviation": "MAJ",
+        "fullName": "Major",
+        "order": 21
+    },
+    {
+        "id": 22,
+        "abbreviation": "SCPT",
+        "fullName": "Staff Captain",
+        "order": 22
+    },
+    {
+        "id": 23,
+        "abbreviation": "GEN",
+        "fullName": "General",
+        "order": 23
+    },
+    {
+        "id": 24,
+        "abbreviation": "HR",
+        "fullName": "Hospitalman Recruit",
+        "order": 24
+    },
+    {
+        "id": 25,
+        "abbreviation": "HA",
+        "fullName": "Hospitalman Apprentice",
+        "order": 25
+    },
+    {
+        "id": 26,
+        "abbreviation": "HN",
+        "fullName": "Hospitalman",
+        "order": 26
+    },
+    {
+        "id": 27,
+        "abbreviation": "HM3",
+        "fullName": "Hospitalman Third Class",
+        "order": 27
+    },
+    {
+        "id": 28,
+        "abbreviation": "HM2",
+        "fullName": "Hospitalman Second Class",
+        "order": 28
+    },
+    {
+        "id": 29,
+        "abbreviation": "HM1",
+        "fullName": "Hospitalman First Class",
+        "order": 29
+    },
+    {
+        "id": 30,
+        "abbreviation": "HMC",
+        "fullName": "Chief Hospital Corpsman",
+        "order": 30
+    },
+    {
+        "id": 31,
+        "abbreviation": "CN",
+        "fullName": "Crewman",
+        "order": 31
+    },
+    {
+        "id": 32,
+        "abbreviation": "PO2",
+        "fullName": "Petty Officer Second Class",
+        "order": 32
+    },
+    {
+        "id": 33,
+        "abbreviation": "PO1",
+        "fullName": "Petty Officer First Class",
+        "order": 33
+    },
+    {
+        "id": 34,
+        "abbreviation": "CPO",
+        "fullName": "Chief Petty Officer",
+        "order": 34
+    },
+    {
+        "id": 35,
+        "abbreviation": "ENS",
+        "fullName": "Ensign",
+        "order": 35
+    },
+    {
+        "id": 36,
+        "abbreviation": "F2LT",
+        "fullName": "Flight Second Lieutenant",
+        "order": 36
+    },
+    {
+        "id": 37,
+        "abbreviation": "F1LT",
+        "fullName": "Flight First Lieutenant",
+        "order": 37
+    },
+    {
+        "id": 38,
+        "abbreviation": "FCPT",
+        "fullName": "Flight Captain",
+        "order": 38
+    },
+    {
+        "id": 39,
+        "abbreviation": "WC",
+        "fullName": "Wing Commander",
+        "order": 39
+    },
+    {
+        "id": 40,
+        "abbreviation": "LTJG",
+        "fullName": "Lieutenant Junior Grade",
+        "order": 40
+    },
+    {
+        "id": 41,
+        "abbreviation": "LT",
+        "fullName": "Lieutenant",
+        "order": 41
+    },
+    {
+        "id": 42,
+        "abbreviation": "LCDR",
+        "fullName": "Lieutenant Commander",
+        "order": 42
+    },
+    {
+        "id": 43,
+        "abbreviation": "CDR",
+        "fullName": "Commander",
+        "order": 43
+    },
+    {
+        "id": 44,
+        "abbreviation": "COMM",
+        "fullName": "Commodore",
+        "order": 44
+    },
+    {
+        "id": 45,
+        "abbreviation": "ADM",
+        "fullName": "Admiral",
+        "order": 45
+    }
+]

@@ -1,0 +1,116 @@
+[
+    {
+        "id": 1,
+        "name": "Vanguard Company",
+        "type": "command",
+        "parentId": null
+    },
+    {
+        "id": 2,
+        "name": "Overlord",
+        "type": "platoon",
+        "parentId": 1
+    },
+    {
+        "id": 3,
+        "name": "Shadow",
+        "type": "squad",
+        "parentId": 2
+    },
+    {
+        "id": 4,
+        "name": "Hellsing",
+        "type": "squad",
+        "parentId": 2
+    },
+    {
+        "id": 5,
+        "name": "Nightfall",
+        "type": "squad",
+        "parentId": 2
+    },
+    {
+        "id": 6,
+        "name": "Dawnbreaker",
+        "type": "squad",
+        "parentId": 2
+    },
+    {
+        "id": 7,
+        "name": "Cerberus",
+        "type": "platoon",
+        "parentId": 1
+    },
+    {
+        "id": 8,
+        "name": "Chimera",
+        "type": "squad",
+        "parentId": 7
+    },
+    {
+        "id": 9,
+        "name": "Medusa",
+        "type": "squad",
+        "parentId": 7
+    },
+    {
+        "id": 10,
+        "name": "Basilisk",
+        "type": "squad",
+        "parentId": 7
+    },
+    {
+        "id": 11,
+        "name": "Phantom",
+        "type": "detachment-command",
+        "parentId": 1
+    },
+    {
+        "id": 12,
+        "name": "Phantom-1",
+        "type": "detachment-child",
+        "parentId": 11
+    },
+    {
+        "id": 13,
+        "name": "Phantom-2",
+        "type": "detachment-child",
+        "parentId": 11
+    },
+    {
+        "id": 14,
+        "name": "Phoenix",
+        "type": "detachment-command",
+        "parentId": 1
+    },
+    {
+        "id": 15,
+        "name": "Phoenix-1",
+        "type": "detachment-child",
+        "parentId": 14
+    },
+    {
+        "id": 16,
+        "name": "Phoenix-2",
+        "type": "detachment-child",
+        "parentId": 14
+    },
+    {
+        "id": 17,
+        "name": "Talon",
+        "type": "detachment-command",
+        "parentId": 1
+    },
+    {
+        "id": 18,
+        "name": "Talon-1",
+        "type": "detachment-child",
+        "parentId": 17
+    },
+    {
+        "id": 19,
+        "name": "Talon-2",
+        "type": "detachment-child",
+        "parentId": 17
+    }
+]
