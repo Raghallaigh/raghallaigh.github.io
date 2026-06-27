@@ -526,17 +526,24 @@
 
             if (template.length > 0) {
                 html += `<ul class="billet-list">`;
+                
+                // Track how many people we've shown per role
+                const roleIndex = {};
+                
                 template.forEach(role => {
                     const assigned = grouped[role] || [];
-                    if (assigned.length > 0) {
-                        assigned.forEach(p => {
-                            const rank = getRank(p.rankId);
-                            html += `<li class="billet-item filled">
-                                        <span class="billet-role">${role}</span>
-                                        <span class="billet-rank">${rank.abbreviation}</span>
-                                        <span class="billet-name">${p.firstName.charAt(0)}. ${p.lastName}</span>
-                                    </li>`;
-                        });
+                    if (!roleIndex[role]) roleIndex[role] = 0;
+                    
+                    if (roleIndex[role] < assigned.length) {
+                        const p = assigned[roleIndex[role]];
+                        const rank = getRank(p.rankId);
+                        const displayName = `${p.firstName.charAt(0)}. ${p.lastName}`;
+                        html += `<li class="billet-item filled">
+                                    <span class="billet-role">${role}</span>
+                                    <span class="billet-rank">${rank.abbreviation}</span>
+                                    <span class="billet-name">${displayName}</span>
+                                </li>`;
+                        roleIndex[role]++;
                     } else {
                         html += `<li class="billet-item empty">
                                     <span class="billet-role">${role}</span>
@@ -544,6 +551,7 @@
                                 </li>`;
                     }
                 });
+                
                 html += `</ul>`;
             }
 
@@ -581,9 +589,10 @@
                 const rank = getRank(p.rankId);
                 const el = getElement(p.elementId);
                 const sClass = statusClass(p.status);
+                const displayName = `${p.firstName.charAt(0)}. ${p.lastName}`;
                 html += `<tr>
                             <td><span class="rank-badge">${rank.abbreviation}</span></td>
-                            <td>${p.firstName.charAt(0)}. ${p.lastName}</td>
+                            <td>${displayName}</td>
                             <td class="${sClass}">${statusLabel(p.status)}</td>
                             <td>${el ? el.name : '—'}</td>
                             <td>${p.role || 'ODST'}</td>
