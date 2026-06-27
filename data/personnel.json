@@ -372,5 +372,115 @@
         "role": "Corpsman",
         "enlisted": "2026-01-19",
         "discordId": "codenametyrant"
+    },
+    {
+        "id": 35,
+        "rankId": 13,
+        "firstName": "J",
+        "lastName": "Wolf",
+        "status": "active",
+        "elementId": 6,
+        "role": "SL",
+        "enlisted": "2025-03-31",
+        "discordId": "jakko6969"
+    },
+    {
+        "id": 36,
+        "rankId": 10,
+        "firstName": "S",
+        "lastName": "Sparkie",
+        "status": "active",
+        "elementId": 6,
+        "role": "ASL",
+        "enlisted": "2025-12-17",
+        "discordId": "valvarock"
+    },
+    {
+        "id": 37,
+        "rankId": 3,
+        "firstName": "J",
+        "lastName": "Jimothee",
+        "status": "active",
+        "elementId": 6,
+        "role": "RTO",
+        "enlisted": "2026-05-18",
+        "discordId": "jimotheejalamet"
+    },
+    {
+        "id": 38,
+        "rankId": 6,
+        "firstName": "C",
+        "lastName": "Charlie",
+        "status": "active",
+        "elementId": 6,
+        "role": "ODST",
+        "enlisted": "2025-12-22",
+        "discordId": "mrilovegaming11"
+    },
+    {
+        "id": 39,
+        "rankId": 3,
+        "firstName": null,
+        "lastName": "Tech",
+        "status": "active",
+        "elementId": 6,
+        "role": "ODST",
+        "enlisted": "2026-02-18",
+        "discordId": "tech1224"
+    },
+    {
+        "id": 40,
+        "rankId": 3,
+        "firstName": "T",
+        "lastName": "Elusive",
+        "status": "active",
+        "elementId": 6,
+        "role": "ODST",
+        "enlisted": "2026-03-28",
+        "discordId": "elusive8796"
+    },
+    {
+        "id": 41,
+        "rankId": 2,
+        "firstName": "R",
+        "lastName": "Phoenix",
+        "status": "active",
+        "elementId": 6,
+        "role": "ODST",
+        "enlisted": "2026-03-30",
+        "discordId": "russianphoenix"
+    },
+    {
+        "id": 42,
+        "rankId": 1,
+        "firstName": null,
+        "lastName": "Vox",
+        "status": "active",
+        "elementId": 6,
+        "role": "ODST",
+        "enlisted": "2026-04-29",
+        "discordId": "pumpkivox"
+    },
+    {
+        "id": 43,
+        "rankId": 3,
+        "firstName": "G",
+        "lastName": "Watcher",
+        "status": "active",
+        "elementId": 3,
+        "role": "ODST",
+        "enlisted": "2026-05-17",
+        "discordId": "portzz"
+    },
+    {
+        "id": 44,
+        "rankId": 25,
+        "firstName": "H",
+        "lastName": "Toothless",
+        "status": "active",
+        "elementId": 6,
+        "role": "Corpsman",
+        "enlisted": "2026-02-09",
+        "discordId": "faded_shadow666"
     }
 ]
