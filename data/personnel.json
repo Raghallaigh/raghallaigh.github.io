@@ -273,5 +273,104 @@
         "role": "Corpsman",
         "enlisted": "2026-01-05",
         "discordId": "lemo"
+    },
+    {
+        "id": 26,
+        "rankId": 10,
+        "firstName": null,
+        "lastName": "Lumine",
+        "status": "active",
+        "elementId": 5,
+        "role": "ASL",
+        "enlisted": "2026-01-12",
+        "discordId": "lumine_exile"
+    },
+    {
+        "id": 27,
+        "rankId": 5,
+        "firstName": "G",
+        "lastName": "Leif",
+        "status": "active",
+        "elementId": 5,
+        "role": "RTO",
+        "enlisted": "2025-11-20",
+        "discordId": "leifericsonlegit"
+    },
+    {
+        "id": 28,
+        "rankId": 7,
+        "firstName": "C",
+        "lastName": "Travis",
+        "status": "active",
+        "elementId": 5,
+        "role": "ODST",
+        "enlisted": "2025-04-20",
+        "discordId": "travis6779"
+    },
+    {
+        "id": 29,
+        "rankId": 6,
+        "firstName": "L",
+        "lastName": "Church",
+        "status": "active",
+        "elementId": 5,
+        "role": "ODST",
+        "enlisted": "2025-10-24",
+        "discordId": "church9199"
+    },
+    {
+        "id": 30,
+        "rankId": 4,
+        "firstName": "S",
+        "lastName": "Ouroboros",
+        "status": "active",
+        "elementId": 5,
+        "role": "ODST",
+        "enlisted": "2026-03-23",
+        "discordId": "eviltaptap"
+    },
+    {
+        "id": 31,
+        "rankId": 2,
+        "firstName": null,
+        "lastName": "Jojo",
+        "status": "active",
+        "elementId": 5,
+        "role": "ODST",
+        "enlisted": "2026-05-12",
+        "discordId": "kinora"
+    },
+    {
+        "id": 32,
+        "rankId": 1,
+        "firstName": "A",
+        "lastName": "Panzer",
+        "status": "active",
+        "elementId": 5,
+        "role": "ODST",
+        "enlisted": "2026-06-07",
+        "discordId": "americanpanzer1941"
+    },
+    {
+        "id": 33,
+        "rankId": 28,
+        "firstName": "N",
+        "lastName": "Koszmar",
+        "status": "active",
+        "elementId": 5,
+        "role": "Corpsman",
+        "enlisted": "2025-10-14",
+        "discordId": "thekoszmar"
+    },
+    {
+        "id": 34,
+        "rankId": 26,
+        "firstName": "A",
+        "lastName": "Tyrant",
+        "status": "active",
+        "elementId": 5,
+        "role": "Corpsman",
+        "enlisted": "2026-01-19",
+        "discordId": "codenametyrant"
     }
 ]
