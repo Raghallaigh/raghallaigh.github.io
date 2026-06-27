@@ -457,6 +457,16 @@
             templar: ['Templar Actual', 'Templar', 'Templar', 'Templar', 'Templar']
         };
 
+        const SQUAD_COLOURS = {
+            'Shadow': '#6aa84f',
+            'Hellsing': '#3d85c6',
+            'Nightfall': '#cc0000',
+            'Chimera': '#6aa84f',
+            'Medusa': '#3d85c6',
+            'Basilisk': '#cc0000',
+            'Dawnbreaker': '#674ea7'
+        };
+
         // ============================================================
         //  GLOBAL DATA VARIABLES (populated from JSON)
         // ============================================================
@@ -522,12 +532,17 @@
             const templateKey = getTemplateKey(el);
             const template = BILLET_TEMPLATES[templateKey] || ['Member'];
 
+            let borderColor = '#f1c232';
+            if (el.type === 'squad' && SQUAD_COLOURS[el.name]) {
+                borderColor = SQUAD_COLOURS[el.name];
+            }
+
             let html = `<div class="tree-node">`;
 
-            html += `<div class="element-item">
-                        <span class="element-name">${el.name}</span>
-                        <span class="element-type">${el.type}</span>
-                    </div>`;
+            html += `<div class="element-item" style="border-color: ${borderColor};">`;
+            html += `<span class="element-name">${el.name}</span>`;
+            html += `<span class="element-type">${el.type}</span>`;
+            html += `</div>`;
 
             if (template.length > 0) {
                 html += `<ul class="billet-list">`;
