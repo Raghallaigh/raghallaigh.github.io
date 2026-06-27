@@ -46,7 +46,7 @@
     {
         "id": 5,
         "rankId": 41,
-        "firstName": "",
+        "firstName": null,
         "lastName": "Mitchell",
         "status": "active",
         "elementId": 0,
@@ -152,5 +152,26 @@
         "role": "ODST",
         "enlisted": "2026-04-19",
         "discordId": "guillume_159"
+    },
+    {
+        "id": 15,
+        "rankId": 28,
+        "firstName": null,
+        "lastName": "Shoto",
+        "status": "active",
+        "elementId": 3,
+        "role": "Corpsman",
+        "enlisted": "2025-09-17",
+        "discordId": "shoto8396"
+    },
+    {
+        "id": 16,
+        "rankId": 24,
+        "firstName": "R",
+        "lastName": "Alice",
+        "status": "active",
+        "elementId": 3,
+        "role": "Corpsman",
+        "enlisted": "2026-04-08",
+        "discordId": "aliceisalone"
     }
-]
