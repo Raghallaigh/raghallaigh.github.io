@@ -533,7 +533,7 @@
                             html += `<li class="billet-item filled">
                                         <span class="billet-role">${role}</span>
                                         <span class="billet-rank">${rank.abbreviation}</span>
-                                        <span class="billet-name">${p.firstName} ${p.lastName}</span>
+                                        <span class="billet-name">${p.firstName.charAt(0)}. ${p.lastName}</span>
                                     </li>`;
                         });
                     } else {
@@ -582,7 +582,7 @@
                 const sClass = statusClass(p.status);
                 html += `<tr>
                             <td><span class="rank-badge">${rank.abbreviation}</span></td>
-                            <td>${p.firstName} ${p.lastName}</td>
+                            <td>${p.firstName.charAt(0)}. ${p.lastName}</td>
                             <td class="${sClass}">${statusLabel(p.status)}</td>
                             <td>${el ? el.name : '—'}</td>
                             <td>${p.role || 'ODST'}</td>
