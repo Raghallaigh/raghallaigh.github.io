@@ -679,7 +679,7 @@
             const container = document.getElementById('orbat-container');
             let roots = ELEMENTS.filter(e => e.parentId === null);
 
-            roots.sort((a, b) => (orderMap[a.name] ?? 999) - (orderMap[b.name] ?? 999))
+            roots.sort((a, b) => (orderMap[a.name] ?? 999) - (orderMap[b.name] ?? 999));
 
             if (roots.length === 0) {
                 container.innerHTML = `<div class="empty-state">No ORBAT data available.</div>`;
