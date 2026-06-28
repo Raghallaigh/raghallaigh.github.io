@@ -159,8 +159,6 @@
 
         .billet-item {
             display: flex;
-            grid-template-columns: 55px auto;
-            justify-content: flex-start;
             align-items: center;
             padding: 0.05rem 0.4rem;
             border-radius: 3px;
@@ -194,7 +192,7 @@
 
         .billet-rankname {
             color: #f1c232;
-            width: 100px;
+            width: 120px;
             font-weight: 600;
             font-size: 0.7rem;
         }
@@ -381,7 +379,7 @@
 
             .tree-node .element-item {
                 background: #f5f5f5;
-                border-color: #b38f2a;
+                border-color: #b38f2a !important;
             }
 
             .tree-node .children::before,
@@ -405,12 +403,22 @@
             }
 
             .rank-badge,
-            .billet-item .billet-rank {
+            .billet-rankname {
                 color: #b38f2a;
             }
 
             .stats-bar .stat-item span {
                 color: #b38f2a;
+            }
+
+            .billet-item:nth-child(even) {
+                background-color: transparent !important;
+            }
+            table tbody tr:nth-child(even) td {
+                background-color: transparent !important;
+            }
+            table tbody tr:hover td {
+                background-color: transparent !important;
             }
         }
     </style>
@@ -536,11 +544,35 @@
             return grouped;
         }
 
+        // ---- Determine which template to use for a given element ----
+        // For detachment types, we map by name (or parent name) to the appropriate template.
+        // Fallback for generic detachments uses 'detachment-command' or 'detachment-child'.
         function getTemplateKey(el) {
-            if (el.type === 'detachment-command' || el.type === 'detachment') {
-                const hasChildren = ELEMENTS.some(e => e.parentId === el.id);
-                return hasChildren ? 'detachment-command' : 'detachment-child';
+            // Explicit templateKey property overrides everything (if present in data)
+            if (el.templateKey) return el.templateKey;
+
+            // Detachment‑command nodes (parents) use a specific template based on their own name
+            if (el.type === 'detachment-command') {
+                // Map parent names to custom templates if needed
+                if (el.name === 'Phantom') return 'air-detachment';
+                if (el.name === 'Phoenix') return 'ground-detachment';
+                if (el.name === 'Talon') return 'qrf-detachment';
+                // Default for any other detachment-command
+                return 'detachment-command';
             }
+
+            // Detachment children use their parent's name to determine the template
+            if (el.type === 'detachment' || el.type === 'detachment-child') {
+                const parent = ELEMENTS.find(e => e.id === el.parentId);
+                if (parent) {
+                    if (parent.name === 'Phantom') return 'air-detachment';
+                    if (parent.name === 'Phoenix') return 'ground-detachment';
+                    if (parent.name === 'Talon') return 'qrf-detachment';
+                }
+                return 'detachment-child';
+            }
+
+            // All other types (squad, platoon, command, templar) use their type as the key
             return el.type;
         }
 
@@ -583,7 +615,6 @@
             if (template.length > 0) {
                 html += `<ul class="billet-list">`;
                 
-                // Track how many people we've shown per role
                 const roleIndex = {};
                 
                 template.forEach(role => {
