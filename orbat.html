@@ -477,6 +477,32 @@
             'Dawnbreaker': '#674ea7'
         };
 
+        const SORT_ORDER = [
+            'Templar',
+            'Vanguard Company',
+            'Overlord',
+            'Shadow',
+            'Hellsing',
+            'Nightfall',
+            'Dawnbreaker',
+            'Cerberus',
+            'Chimera',
+            'Medusa',
+            'Basilisk',
+            'Phantom',
+            'Phantom-1',
+            'Phantom-2',
+            'Phoenix',
+            'Phoenix-1',
+            'Phoenix-2',
+            'Talon',
+            'Talon-1',
+            'Talon-2'
+        ]
+
+        const orderMap = {};
+        SORT_ORDER.forEach((name, index) => orderMap[name] = index)
+
         // ============================================================
         //  GLOBAL DATA VARIABLES (populated from JSON)
         // ============================================================
@@ -585,7 +611,10 @@
                 html += `</ul>`;
             }
 
-            const children = ELEMENTS.filter(e => e.parentId === el.id);
+            let children = ELEMENTS.filter(e => e.parentId === el.id);
+
+            children.sort((a, b) => (orderMap[a.name] ?? 999) - (orderMap[b.name] ?? 999));
+
             if (children.length > 0) {
                 html += `<div class="children">`;
                 children.forEach(child => {
@@ -648,7 +677,9 @@
 
         function render() {
             const container = document.getElementById('orbat-container');
-            const roots = ELEMENTS.filter(e => e.parentId === null);
+            let roots = ELEMENTS.filter(e => e.parentId === null);
+
+            roots.sort((a, b) => (orderMap[a.name] ?? 999) - (orderMap[b.name] ?? 999))
 
             if (roots.length === 0) {
                 container.innerHTML = `<div class="empty-state">No ORBAT data available.</div>`;
