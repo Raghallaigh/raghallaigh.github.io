@@ -547,9 +547,6 @@
         function getTemplateKey(el) {
             if (el.templateKey) return el.templateKey;
             if (el.type === 'detachment-command') {
-                if (el.name === 'Phantom') return 'air-detachment';
-                if (el.name === 'Phoenix') return 'ground-detachment';
-                if (el.name === 'Talon') return 'qrf-detachment';
                 return 'detachment-command';
             }
             if (el.type === 'detachment' || el.type === 'detachment-child') {
