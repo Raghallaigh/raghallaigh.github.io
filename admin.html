@@ -9,9 +9,8 @@
         table { width: 100%; border-collapse: collapse; }
         th, td { border: 1px solid #444; padding: 0.3rem; }
         input, select, button { background: #333; color: #eee; border: 1px solid #555; padding: 0.2rem 0.5rem; }
-        .actions { display: flex; gap: 0.5rem; }
-        .edit-form { display: none; margin-top: 0.5rem; }
         .download-btn { background: #f1c232; color: #000; padding: 0.5rem 1rem; margin: 0.5rem 0; border: none; cursor: pointer; }
+        .error { color: #eb5757; padding: 1rem; }
     </style>
 </head>
 <body>
@@ -19,25 +18,49 @@
     <h1>ORBAT Data Admin</h1>
     <p>Edit data, then download the updated JSON files and replace them in your <code>data/</code> folder.</p>
 
-    <!-- We'll load data here -->
     <div id="app">
         <div id="loading">Loading...</div>
     </div>
 
     <script>
-        // In a real implementation, these would be fetched from your JSON files.
-        // For this example, we'll use placeholder data.
+        // ============================================================
+        //  DATA STORE (global arrays)
+        // ============================================================
         let ranks = [];
         let elements = [];
         let personnel = [];
 
-        // Utility: get next ID
-        function nextId(arr) {
-            if (arr.length === 0) return 1;
-            return Math.max(...arr.map(item => item.id)) + 1;
-        }
+        // ============================================================
+        //  FIELD DEFINITIONS
+        // ============================================================
+        const rankFields = [
+            { key: 'id', label: 'ID', type: 'number', required: true },
+            { key: 'abbreviation', label: 'Abbrev', type: 'text', required: true },
+            { key: 'fullName', label: 'Full Name', type: 'text', required: true },
+            { key: 'order', label: 'Order', type: 'number', required: true }
+        ];
 
-        // Render all tables
+        const elementFields = [
+            { key: 'id', label: 'ID', type: 'number', required: true },
+            { key: 'name', label: 'Name', type: 'text', required: true },
+            { key: 'type', label: 'Type', type: 'text', required: true },
+            { key: 'parentId', label: 'Parent ID', type: 'number' },
+            { key: 'templateKey', label: 'Template Key', type: 'text' }
+        ];
+
+        const personnelFields = [
+            { key: 'id', label: 'ID', type: 'number', required: true },
+            { key: 'rankId', label: 'Rank ID', type: 'number', required: true },
+            { key: 'firstName', label: 'First Name', type: 'text', required: true },
+            { key: 'lastName', label: 'Last Name', type: 'text', required: true },
+            { key: 'status', label: 'Status', type: 'text', required: true },
+            { key: 'elementId', label: 'Element ID', type: 'number', required: true },
+            { key: 'role', label: 'Role', type: 'text', required: true }
+        ];
+
+        // ============================================================
+        //  RENDER FUNCTIONS
+        // ============================================================
         function render() {
             const app = document.getElementById('app');
             app.innerHTML = `
@@ -62,34 +85,6 @@
             `;
         }
 
-        // Field definitions – used to generate forms and table columns
-        const rankFields = [
-            { key: 'id', label: 'ID', type: 'number', required: true },
-            { key: 'abbreviation', label: 'Abbrev', type: 'text', required: true },
-            { key: 'fullName', label: 'Full Name', type: 'text', required: true },
-            { key: 'type', label: 'Type', type: 'text', required: true },
-            { key: 'order', label: 'Order', type: 'number', required: true }
-        ];
-
-        const elementFields = [
-            { key: 'id', label: 'ID', type: 'number', required: true },
-            { key: 'name', label: 'Name', type: 'text', required: true },
-            { key: 'type', label: 'Type', type: 'text', required: true },
-            { key: 'parentId', label: 'Parent ID', type: 'number' },
-            { key: 'templateKey', label: 'Template Key', type: 'text' }
-        ];
-
-        const personnelFields = [
-            { key: 'id', label: 'ID', type: 'number', required: true },
-            { key: 'rankId', label: 'Rank ID', type: 'number', required: true },
-            { key: 'firstName', label: 'First Name', type: 'text', required: true },
-            { key: 'lastName', label: 'Last Name', type: 'text', required: true },
-            { key: 'status', label: 'Status', type: 'text', required: true },
-            { key: 'elementId', label: 'Element ID', type: 'number', required: true },
-            { key: 'role', label: 'Role', type: 'text', required: true }
-        ];
-
-        // Render a table (data and edit/delete buttons)
         function renderTable(type, data, fields) {
             if (data.length === 0) return '<p>No data.</p>';
             let html = `<table><thead><tr>`;
@@ -102,13 +97,11 @@
                             <button onclick="editItem('${type}', ${index})">Edit</button>
                             <button onclick="deleteItem('${type}', ${index})">Delete</button>
                         </td></tr>`;
-                // Optionally, an inline edit form could be shown here
             });
             html += `</tbody></table>`;
             return html;
         }
 
-        // Add form
         function renderAddForm(type, fields) {
             let html = `<form onsubmit="addItem('${type}'); return false;" style="margin-top:1rem;">`;
             fields.forEach(f => {
@@ -118,10 +111,11 @@
             return html;
         }
 
-        // Global data storage
+        // ============================================================
+        //  CRUD OPERATIONS (work on dataStore)
+        // ============================================================
         const dataStore = { ranks, elements, personnel };
 
-        // Add item
         function addItem(type) {
             const form = document.querySelector(`#${type}-section form`);
             const inputs = form.querySelectorAll('input');
@@ -131,40 +125,47 @@
                 const val = inputs[i].value;
                 newItem[f.key] = f.type === 'number' ? Number(val) : val;
             });
-            // Ensure ID is unique; if user enters an existing ID, we could warn.
             const arr = dataStore[type];
             if (arr.some(item => item.id === newItem.id)) {
                 alert('ID already exists. Please use a unique ID.');
                 return;
             }
             arr.push(newItem);
+            // Update global references
+            updateGlobalArrays();
             render();
         }
 
-        // Delete item
         function deleteItem(type, index) {
             if (!confirm('Delete this item?')) return;
             dataStore[type].splice(index, 1);
+            updateGlobalArrays();
             render();
         }
 
-        // Edit item (simple: just load into a form at the top – we'll implement a quick version)
-        // For simplicity, we'll use a prompt-based edit, but you can build a modal.
         function editItem(type, index) {
             const arr = dataStore[type];
             const item = arr[index];
             const fields = type === 'ranks' ? rankFields : (type === 'elements' ? elementFields : personnelFields);
-            // Use prompt for each field – crude but functional
             fields.forEach(f => {
                 const newVal = prompt(`Edit ${f.label} (current: ${item[f.key]})`, item[f.key]);
                 if (newVal !== null) {
                     item[f.key] = f.type === 'number' ? Number(newVal) : newVal;
                 }
             });
+            updateGlobalArrays();
             render();
         }
 
-        // Download JSON
+        function updateGlobalArrays() {
+            ranks = dataStore.ranks;
+            elements = dataStore.elements;
+            personnel = dataStore.personnel;
+        }
+
+        // ============================================================
+        //  DOWNLOAD JSON
+        // ============================================================
         function downloadJSON(type) {
             const data = dataStore[type];
             const json = JSON.stringify(data, null, 2);
@@ -177,39 +178,48 @@
             URL.revokeObjectURL(url);
         }
 
-        // Load data – in practice, use fetch
+        // ============================================================
+        //  LOAD DATA VIA FETCH
+        // ============================================================
         async function loadData() {
+            const app = document.getElementById('app');
             try {
-                // Simulate loading; replace with actual fetch calls
-                // const ranksRes = await fetch('data/ranks.json');
-                // const elementsRes = await fetch('data/elements.json');
-                // const personnelRes = await fetch('data/personnel.json');
-                // ranks = await ranksRes.json();
-                // elements = await elementsRes.json();
-                // personnel = await personnelRes.json();
+                // Fetch all three JSON files in parallel
+                const [ranksRes, elementsRes, personnelRes] = await Promise.all([
+                    fetch('data/ranks.json'),
+                    fetch('data/elements.json'),
+                    fetch('data/personnel.json')
+                ]);
 
-                // For demo, we'll use sample data (since we don't have the files here)
-                ranks = [
-                    { id: 1, abbreviation: 'PVT', fullName: 'Private', order: 2 },
-                    { id: 2, abbreviation: 'CPL', fullName: 'Corporal', order: 11 }
-                ];
-                elements = [
-                    { id: 1, name: 'Vanguard Company', type: 'command', parentId: null }
-                ];
-                personnel = [
-                    { id: 1, rankId: 2, firstName: 'G', lastName: 'Grand', status: 'active', elementId: 1, role: 'CO' }
-                ];
+                // Check for fetch errors
+                if (!ranksRes.ok || !elementsRes.ok || !personnelRes.ok) {
+                    throw new Error('One or more JSON files could not be loaded. Check that they exist in the data/ folder.');
+                }
 
+                // Parse JSON
+                const ranksData = await ranksRes.json();
+                const elementsData = await elementsRes.json();
+                const personnelData = await personnelRes.json();
+
+                // Populate global arrays and dataStore
+                ranks = ranksData;
+                elements = elementsData;
+                personnel = personnelData;
                 dataStore.ranks = ranks;
                 dataStore.elements = elements;
                 dataStore.personnel = personnel;
 
+                // Render the admin UI
                 render();
-            } catch (e) {
-                document.getElementById('app').innerHTML = `<div class="loading">Error loading data: ${e.message}</div>`;
+            } catch (error) {
+                app.innerHTML = `<div class="error">⚠️ Error loading data: ${error.message}</div>`;
+                console.error('Admin load error:', error);
             }
         }
 
+        // ============================================================
+        //  INIT
+        // ============================================================
         document.addEventListener('DOMContentLoaded', loadData);
     </script>
 </body>
