@@ -544,24 +544,14 @@
             return grouped;
         }
 
-        // ---- Determine which template to use for a given element ----
-        // For detachment types, we map by name (or parent name) to the appropriate template.
-        // Fallback for generic detachments uses 'detachment-command' or 'detachment-child'.
         function getTemplateKey(el) {
-            // Explicit templateKey property overrides everything (if present in data)
             if (el.templateKey) return el.templateKey;
-
-            // Detachment‑command nodes (parents) use a specific template based on their own name
             if (el.type === 'detachment-command') {
-                // Map parent names to custom templates if needed
                 if (el.name === 'Phantom') return 'air-detachment';
                 if (el.name === 'Phoenix') return 'ground-detachment';
                 if (el.name === 'Talon') return 'qrf-detachment';
-                // Default for any other detachment-command
                 return 'detachment-command';
             }
-
-            // Detachment children use their parent's name to determine the template
             if (el.type === 'detachment' || el.type === 'detachment-child') {
                 const parent = ELEMENTS.find(e => e.id === el.parentId);
                 if (parent) {
@@ -571,8 +561,6 @@
                 }
                 return 'detachment-child';
             }
-
-            // All other types (squad, platoon, command, templar) use their type as the key
             return el.type;
         }
 
@@ -589,6 +577,49 @@
         function formatDisplayName(first, last) {
             const initial = first && first.length > 0 ? first.charAt(0) : '';
             return initial ? `${initial}. ${last}` : last;
+        }
+
+        // ============================================================
+        //  ROSTER SORTING LOGIC
+        // ============================================================
+
+        // Build a map of element name to its order index (from SORT_ORDER)
+        function getElementOrderIndex(el) {
+            if (!el) return 9999;
+            return orderMap[el.name] ?? 9999;
+        }
+
+        // Build a map of element ID to its billet template array (role order)
+        function getTemplateForElement(el) {
+            const key = getTemplateKey(el);
+            return BILLET_TEMPLATES[key] || [];
+        }
+
+        // Get the role index for a given personnel item within its element's template
+        function getRoleIndex(p, el) {
+            const template = getTemplateForElement(el);
+            const role = p.role || 'ODST';
+            const idx = template.indexOf(role);
+            return idx === -1 ? 9999 : idx;
+        }
+
+        // Sort personnel: first by element order, then by role order, then by rank order descending
+        function sortPersonnel(a, b) {
+            const elA = getElement(a.elementId);
+            const elB = getElement(b.elementId);
+            const orderA = getElementOrderIndex(elA);
+            const orderB = getElementOrderIndex(elB);
+            if (orderA !== orderB) return orderA - orderB;
+
+            // Same element – sort by role order
+            const roleIdxA = getRoleIndex(a, elA);
+            const roleIdxB = getRoleIndex(b, elB);
+            if (roleIdxA !== roleIdxB) return roleIdxA - roleIdxB;
+
+            // Same role – sort by rank order descending (higher rank first)
+            const rankA = getRank(a.rankId);
+            const rankB = getRank(b.rankId);
+            return (rankB.order || 999) - (rankA.order || 999);
         }
 
         // ============================================================
@@ -659,9 +690,8 @@
         }
 
         function renderRoster() {
-            const sorted = [...PERSONNEL].sort((a, b) => {
-                return getRank(b.rankId).order - getRank(a.rankId).order;
-            });
+            // Sort personnel using the custom sort function
+            const sorted = [...PERSONNEL].sort(sortPersonnel);
 
             let html = `<table>
                             <thead>
