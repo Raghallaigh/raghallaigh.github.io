@@ -11,6 +11,21 @@
         input, select, button { background: #333; color: #eee; border: 1px solid #555; padding: 0.2rem 0.5rem; }
         .download-btn { background: #f1c232; color: #000; padding: 0.5rem 1rem; margin: 0.5rem 0; border: none; cursor: pointer; }
         .error { color: #eb5757; padding: 1rem; }
+        .add-form { margin-top: 1rem; }
+        .add-form label { margin-right: 0.5rem; }
+        .add-form input, .add-form select { margin-right: 1rem; }
+        .edit-modal {
+            position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.7);
+            display: flex; align-items: center; justify-content: center; z-index: 1000;
+        }
+        .edit-modal-content {
+            background: #2a2a2a; padding: 2rem; border-radius: 8px; max-width: 500px; width: 100%;
+            border: 1px solid #f1c232;
+        }
+        .edit-modal-content label { display: block; margin: 0.5rem 0; }
+        .edit-modal-content input, .edit-modal-content select { width: 100%; padding: 0.3rem; }
+        .edit-modal-content .buttons { margin-top: 1rem; display: flex; gap: 0.5rem; justify-content: flex-end; }
+        .hidden { display: none; }
     </style>
 </head>
 <body>
@@ -20,6 +35,19 @@
 
     <div id="app">
         <div id="loading">Loading...</div>
+    </div>
+
+    <div id="edit-modal" class="edit-modal hidden">
+        <div class="edit-modal-content">
+            <h3 id="edit-title">Edit Item</h3>
+            <form id="edit-form">
+                <!-- fields injected by JS -->
+                <div class="buttons">
+                    <button type="button" onclick="closeEdit()">Cancel</button>
+                    <button type="submit">Save</button>
+                </div>
+            </form>
+        </div>
     </div>
 
     <script>
@@ -37,7 +65,6 @@
             { key: 'id', label: 'ID', type: 'number', required: true },
             { key: 'abbreviation', label: 'Abbrev', type: 'text', required: true },
             { key: 'fullName', label: 'Full Name', type: 'text', required: true },
-            { key: 'type', label: 'Type', type: 'text', required: true },
             { key: 'order', label: 'Order', type: 'number', required: true }
         ];
 
@@ -60,25 +87,58 @@
         ];
 
         // ============================================================
+        //  HELPERS
+        // ============================================================
+        function getFieldDefs(type) {
+            if (type === 'ranks') return rankFields;
+            if (type === 'elements') return elementFields;
+            if (type === 'personnel') return personnelFields;
+            return [];
+        }
+
+        function getDisplayNameForRank(id) {
+            const r = ranks.find(r => r.id === id);
+            return r ? `${r.abbreviation} - ${r.fullName}` : `(unknown)`;
+        }
+
+        function getDisplayNameForElement(id) {
+            const e = elements.find(e => e.id === id);
+            return e ? e.name : `(unknown)`;
+        }
+
+        function generateUniqueId(arr) {
+            // Generate a random integer between 1 and 99999 that is not used
+            let id;
+            let attempts = 0;
+            const usedIds = new Set(arr.map(item => item.id));
+            do {
+                id = Math.floor(Math.random() * 99999) + 1;
+                attempts++;
+                if (attempts > 10000) break; // safety
+            } while (usedIds.has(id));
+            return id;
+        }
+
+        // ============================================================
         //  RENDER FUNCTIONS
         // ============================================================
         function render() {
             const app = document.getElementById('app');
             app.innerHTML = `
                 <div id="rank-section" class="data-section">
-                    <h2>Ranks</h2>
+                    <h2>Ranks (${ranks.length})</h2>
                     ${renderTable('ranks', ranks, rankFields)}
                     ${renderAddForm('ranks', rankFields)}
                     <button class="download-btn" onclick="downloadJSON('ranks')">Download ranks.json</button>
                 </div>
                 <div id="element-section" class="data-section">
-                    <h2>Elements</h2>
+                    <h2>Elements (${elements.length})</h2>
                     ${renderTable('elements', elements, elementFields)}
                     ${renderAddForm('elements', elementFields)}
                     <button class="download-btn" onclick="downloadJSON('elements')">Download elements.json</button>
                 </div>
                 <div id="personnel-section" class="data-section">
-                    <h2>Personnel</h2>
+                    <h2>Personnel (${personnel.length})</h2>
                     ${renderTable('personnel', personnel, personnelFields)}
                     ${renderAddForm('personnel', personnelFields)}
                     <button class="download-btn" onclick="downloadJSON('personnel')">Download personnel.json</button>
@@ -92,8 +152,16 @@
             fields.forEach(f => html += `<th>${f.label}</th>`);
             html += `<th>Actions</th></tr></thead><tbody>`;
             data.forEach((item, index) => {
-                html += `<tr id="${type}-row-${index}">`;
-                fields.forEach(f => html += `<td>${item[f.key] ?? ''}</td>`);
+                html += `<tr>`;
+                fields.forEach(f => {
+                    let val = item[f.key] ?? '';
+                    if (f.key === 'rankId' && type === 'personnel') {
+                        val = getDisplayNameForRank(val);
+                    } else if ((f.key === 'elementId' || f.key === 'parentId') && type === 'personnel' || type === 'elements') {
+                        val = val ? getDisplayNameForElement(val) : 'none';
+                    }
+                    html += `<td>${val}</td>`;
+                });
                 html += `<td>
                             <button onclick="editItem('${type}', ${index})">Edit</button>
                             <button onclick="deleteItem('${type}', ${index})">Delete</button>
@@ -104,37 +172,73 @@
         }
 
         function renderAddForm(type, fields) {
-            let html = `<form onsubmit="addItem('${type}'); return false;" style="margin-top:1rem;">`;
-            fields.forEach(f => {
-                html += `<label>${f.label}: <input type="${f.type}" name="${f.key}" ${f.required ? 'required' : ''} /></label> `;
+            // Skip ID field – we auto-generate
+            const formFields = fields.filter(f => f.key !== 'id');
+            let html = `<form class="add-form" onsubmit="addItem('${type}'); return false;">`;
+            formFields.forEach(f => {
+                html += `<label>${f.label}: `;
+                if (f.key === 'rankId') {
+                    html += `<select name="${f.key}" required>`;
+                    html += `<option value="">Select a rank...</option>`;
+                    ranks.forEach(r => {
+                        html += `<option value="${r.id}">${r.abbreviation} - ${r.fullName}</option>`;
+                    });
+                    html += `</select>`;
+                } else if (f.key === 'elementId' || f.key === 'parentId') {
+                    html += `<select name="${f.key}" ${f.key === 'elementId' ? 'required' : ''}>`;
+                    if (f.key === 'parentId') {
+                        html += `<option value="">None</option>`;
+                    }
+                    elements.forEach(e => {
+                        html += `<option value="${e.id}">${e.name}</option>`;
+                    });
+                    html += `</select>`;
+                } else {
+                    html += `<input type="${f.type}" name="${f.key}" ${f.required ? 'required' : ''} />`;
+                }
+                html += `</label> `;
             });
             html += `<button type="submit">Add</button></form>`;
             return html;
         }
 
         // ============================================================
-        //  CRUD OPERATIONS (work on dataStore)
+        //  CRUD OPERATIONS
         // ============================================================
         const dataStore = { ranks, elements, personnel };
 
         function addItem(type) {
-            const form = document.querySelector(`#${type}-section form`);
-            const inputs = form.querySelectorAll('input');
+            const form = document.querySelector(`#${type}-section .add-form`);
+            const formData = new FormData(form);
             const newItem = {};
-            const fields = type === 'ranks' ? rankFields : (type === 'elements' ? elementFields : personnelFields);
-            fields.forEach((f, i) => {
-                const val = inputs[i].value;
-                newItem[f.key] = f.type === 'number' ? Number(val) : val;
-            });
+            const fields = getFieldDefs(type);
+            // Generate unique ID
             const arr = dataStore[type];
-            if (arr.some(item => item.id === newItem.id)) {
-                alert('ID already exists. Please use a unique ID.');
-                return;
+            newItem.id = generateUniqueId(arr);
+            // Populate other fields from form
+            fields.forEach(f => {
+                if (f.key === 'id') return;
+                let val = formData.get(f.key);
+                if (f.type === 'number' && val !== '') {
+                    val = Number(val);
+                } else if (f.type === 'number' && val === '') {
+                    // For optional numbers (parentId), treat empty as null
+                    val = null;
+                }
+                newItem[f.key] = val;
+            });
+            // Validate required fields (except ID which is auto)
+            for (let f of fields) {
+                if (f.key === 'id') continue;
+                if (f.required && (newItem[f.key] === undefined || newItem[f.key] === '' || newItem[f.key] === null)) {
+                    alert(`Field "${f.label}" is required.`);
+                    return;
+                }
             }
             arr.push(newItem);
-            // Update global references
             updateGlobalArrays();
             render();
+            form.reset();
         }
 
         function deleteItem(type, index) {
@@ -144,17 +248,99 @@
             render();
         }
 
+        // ---- Edit with modal ----
+        let currentEditType = null;
+        let currentEditIndex = null;
+
         function editItem(type, index) {
             const arr = dataStore[type];
             const item = arr[index];
-            const fields = type === 'ranks' ? rankFields : (type === 'elements' ? elementFields : personnelFields);
+            const fields = getFieldDefs(type);
+            const modal = document.getElementById('edit-modal');
+            const form = document.getElementById('edit-form');
+            const title = document.getElementById('edit-title');
+            title.textContent = `Edit ${type.slice(0, -1)} (ID: ${item.id})`;
+            // Build form fields
+            let html = '';
             fields.forEach(f => {
-                const newVal = prompt(`Edit ${f.label} (current: ${item[f.key]})`, item[f.key]);
-                if (newVal !== null) {
-                    item[f.key] = f.type === 'number' ? Number(newVal) : newVal;
+                if (f.key === 'id') {
+                    html += `<input type="hidden" name="id" value="${item.id}" />`;
+                    return;
                 }
+                html += `<label>${f.label}: `;
+                const val = item[f.key] ?? '';
+                if (f.key === 'rankId') {
+                    html += `<select name="${f.key}" required>`;
+                    html += `<option value="">Select a rank...</option>`;
+                    ranks.forEach(r => {
+                        const selected = r.id === val ? 'selected' : '';
+                        html += `<option value="${r.id}" ${selected}>${r.abbreviation} - ${r.fullName}</option>`;
+                    });
+                    html += `</select>`;
+                } else if (f.key === 'elementId' || f.key === 'parentId') {
+                    html += `<select name="${f.key}" ${f.key === 'elementId' ? 'required' : ''}>`;
+                    if (f.key === 'parentId') {
+                        html += `<option value="" ${val === null || val === '' ? 'selected' : ''}>None</option>`;
+                    }
+                    elements.forEach(e => {
+                        const selected = e.id === val ? 'selected' : '';
+                        html += `<option value="${e.id}" ${selected}>${e.name}</option>`;
+                    });
+                    html += `</select>`;
+                } else {
+                    html += `<input type="${f.type}" name="${f.key}" value="${val}" ${f.required ? 'required' : ''} />`;
+                }
+                html += `</label>`;
             });
+            form.innerHTML = html + `<div class="buttons">
+                <button type="button" onclick="closeEdit()">Cancel</button>
+                <button type="submit">Save</button>
+            </div>`;
+            modal.classList.remove('hidden');
+            currentEditType = type;
+            currentEditIndex = index;
+            form.onsubmit = function(e) {
+                e.preventDefault();
+                saveEdit();
+            };
+        }
+
+        function closeEdit() {
+            document.getElementById('edit-modal').classList.add('hidden');
+            currentEditType = null;
+            currentEditIndex = null;
+        }
+
+        function saveEdit() {
+            const type = currentEditType;
+            const index = currentEditIndex;
+            if (type === null || index === null) return;
+            const arr = dataStore[type];
+            const item = arr[index];
+            const form = document.getElementById('edit-form');
+            const formData = new FormData(form);
+            const fields = getFieldDefs(type);
+            // Update item
+            fields.forEach(f => {
+                if (f.key === 'id') return;
+                let val = formData.get(f.key);
+                if (f.type === 'number' && val !== '') {
+                    val = Number(val);
+                } else if (f.type === 'number' && val === '') {
+                    val = null;
+                }
+                item[f.key] = val;
+            });
+            // Validate required
+            for (let f of fields) {
+                if (f.key === 'id') continue;
+                if (f.required && (item[f.key] === undefined || item[f.key] === '' || item[f.key] === null)) {
+                    alert(`Field "${f.label}" is required.`);
+                    return;
+                }
+            }
             updateGlobalArrays();
+            closeEdit();
             render();
         }
 
@@ -185,24 +371,20 @@
         async function loadData() {
             const app = document.getElementById('app');
             try {
-                // Fetch all three JSON files in parallel
                 const [ranksRes, elementsRes, personnelRes] = await Promise.all([
                     fetch('data/ranks.json'),
                     fetch('data/elements.json'),
                     fetch('data/personnel.json')
                 ]);
 
-                // Check for fetch errors
                 if (!ranksRes.ok || !elementsRes.ok || !personnelRes.ok) {
                     throw new Error('One or more JSON files could not be loaded. Check that they exist in the data/ folder.');
                 }
 
-                // Parse JSON
                 const ranksData = await ranksRes.json();
                 const elementsData = await elementsRes.json();
                 const personnelData = await personnelRes.json();
 
-                // Populate global arrays and dataStore
                 ranks = ranksData;
                 elements = elementsData;
                 personnel = personnelData;
@@ -210,7 +392,6 @@
                 dataStore.elements = elements;
                 dataStore.personnel = personnel;
 
-                // Render the admin UI
                 render();
             } catch (error) {
                 app.innerHTML = `<div class="error">⚠️ Error loading data: ${error.message}</div>`;
