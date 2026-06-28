@@ -59,31 +59,35 @@
         let personnel = [];
 
         // ============================================================
-        //  FIELD DEFINITIONS
+        //  FIELD DEFINITIONS – includes all fields from your JSON
+        //  (extra fields like 'type', 'enlisted', 'discordId' are now present)
         // ============================================================
         const rankFields = [
             { key: 'id', label: 'ID', type: 'number', required: true },
             { key: 'abbreviation', label: 'Abbrev', type: 'text', required: true },
             { key: 'fullName', label: 'Full Name', type: 'text', required: true },
+            { key: 'type', label: 'Type', type: 'text', required: false },   // e.g. "Zeus"
             { key: 'order', label: 'Order', type: 'number', required: true }
         ];
 
         const elementFields = [
             { key: 'id', label: 'ID', type: 'number', required: true },
             { key: 'name', label: 'Name', type: 'text', required: true },
-            { key: 'type', label: 'Type', type: 'text', required: true },
-            { key: 'parentId', label: 'Parent ID', type: 'number' },
-            { key: 'templateKey', label: 'Template Key', type: 'text' }
+            { key: 'type', label: 'Type', type: 'text', required: true },    // e.g. "templar", "command", etc.
+            { key: 'parentId', label: 'Parent ID', type: 'number', required: false },
+            { key: 'templateKey', label: 'Template Key', type: 'text', required: false }
         ];
 
         const personnelFields = [
             { key: 'id', label: 'ID', type: 'number', required: true },
-            { key: 'rankId', label: 'Rank ID', type: 'number', required: true },
+            { key: 'rankId', label: 'Rank', type: 'number', required: true },
             { key: 'firstName', label: 'First Name', type: 'text', required: true },
             { key: 'lastName', label: 'Last Name', type: 'text', required: true },
             { key: 'status', label: 'Status', type: 'text', required: true },
-            { key: 'elementId', label: 'Element ID', type: 'number', required: true },
-            { key: 'role', label: 'Role', type: 'text', required: true }
+            { key: 'elementId', label: 'Unit', type: 'number', required: true },
+            { key: 'role', label: 'Role', type: 'text', required: true },
+            { key: 'enlisted', label: 'Enlisted Date', type: 'date', required: false },
+            { key: 'discordId', label: 'Discord ID', type: 'text', required: false }
         ];
 
         // ============================================================
@@ -107,14 +111,13 @@
         }
 
         function generateUniqueId(arr) {
-            // Generate a random integer between 1 and 99999 that is not used
             let id;
             let attempts = 0;
             const usedIds = new Set(arr.map(item => item.id));
             do {
                 id = Math.floor(Math.random() * 99999) + 1;
                 attempts++;
-                if (attempts > 10000) break; // safety
+                if (attempts > 10000) break;
             } while (usedIds.has(id));
             return id;
         }
@@ -155,9 +158,10 @@
                 html += `<tr>`;
                 fields.forEach(f => {
                     let val = item[f.key] ?? '';
-                    if (f.key === 'rankId' && type === 'personnel') {
+                    // Replace foreign keys with human‑readable names
+                    if (f.key === 'rankId') {
                         val = getDisplayNameForRank(val);
-                    } else if ((f.key === 'elementId' || f.key === 'parentId') && type === 'personnel' || type === 'elements') {
+                    } else if (f.key === 'elementId' || f.key === 'parentId') {
                         val = val ? getDisplayNameForElement(val) : 'none';
                     }
                     html += `<td>${val}</td>`;
@@ -172,7 +176,6 @@
         }
 
         function renderAddForm(type, fields) {
-            // Skip ID field – we auto-generate
             const formFields = fields.filter(f => f.key !== 'id');
             let html = `<form class="add-form" onsubmit="addItem('${type}'); return false;">`;
             formFields.forEach(f => {
@@ -194,7 +197,9 @@
                     });
                     html += `</select>`;
                 } else {
-                    html += `<input type="${f.type}" name="${f.key}" ${f.required ? 'required' : ''} />`;
+                    // For date fields, use type="date"; others as defined
+                    const inputType = f.type === 'date' ? 'date' : f.type;
+                    html += `<input type="${inputType}" name="${f.key}" ${f.required ? 'required' : ''} />`;
                 }
                 html += `</label> `;
             });
@@ -212,22 +217,17 @@
             const formData = new FormData(form);
             const newItem = {};
             const fields = getFieldDefs(type);
-            // Generate unique ID
-            const arr = dataStore[type];
-            newItem.id = generateUniqueId(arr);
-            // Populate other fields from form
+            newItem.id = generateUniqueId(dataStore[type]);
             fields.forEach(f => {
                 if (f.key === 'id') return;
                 let val = formData.get(f.key);
                 if (f.type === 'number' && val !== '') {
                     val = Number(val);
                 } else if (f.type === 'number' && val === '') {
-                    // For optional numbers (parentId), treat empty as null
                     val = null;
                 }
                 newItem[f.key] = val;
             });
-            // Validate required fields (except ID which is auto)
             for (let f of fields) {
                 if (f.key === 'id') continue;
                 if (f.required && (newItem[f.key] === undefined || newItem[f.key] === '' || newItem[f.key] === null)) {
@@ -235,7 +235,7 @@
                     return;
                 }
             }
-            arr.push(newItem);
+            dataStore[type].push(newItem);
             updateGlobalArrays();
             render();
             form.reset();
@@ -248,7 +248,6 @@
             render();
         }
 
-        // ---- Edit with modal ----
         let currentEditType = null;
         let currentEditIndex = null;
 
@@ -260,7 +259,6 @@
             const form = document.getElementById('edit-form');
             const title = document.getElementById('edit-title');
             title.textContent = `Edit ${type.slice(0, -1)} (ID: ${item.id})`;
-            // Build form fields
             let html = '';
             fields.forEach(f => {
                 if (f.key === 'id') {
@@ -288,7 +286,8 @@
                     });
                     html += `</select>`;
                 } else {
-                    html += `<input type="${f.type}" name="${f.key}" value="${val}" ${f.required ? 'required' : ''} />`;
+                    const inputType = f.type === 'date' ? 'date' : f.type;
+                    html += `<input type="${inputType}" name="${f.key}" value="${val}" ${f.required ? 'required' : ''} />`;
                 }
                 html += `</label>`;
             });
@@ -320,7 +319,6 @@
             const form = document.getElementById('edit-form');
             const formData = new FormData(form);
             const fields = getFieldDefs(type);
-            // Update item
             fields.forEach(f => {
                 if (f.key === 'id') return;
                 let val = formData.get(f.key);
@@ -331,7 +329,6 @@
                 }
                 item[f.key] = val;
             });
-            // Validate required
             for (let f of fields) {
                 if (f.key === 'id') continue;
                 if (f.required && (item[f.key] === undefined || item[f.key] === '' || item[f.key] === null)) {
@@ -404,5 +401,6 @@
         // ============================================================
         document.addEventListener('DOMContentLoaded', loadData);
     </script>
+
 </body>
 </html>
