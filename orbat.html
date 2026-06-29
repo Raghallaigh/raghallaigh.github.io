@@ -535,14 +535,13 @@
                 if (p.assignments) {
                     return p.assignments.some(a => a.elementId === elementId);
                 }
-
                 return p.elementId === elementId;
             });
         }
 
         function getPersonnelByRole(elementId) {
             const grouped = {};
-            PERSONNEL.filter(p => {
+            PERSONNEL.forEach(p => {
                 const assignments = p.assignments ? p.assignments : [{ elementId: p.elementId, role: p.role || 'ODST' }];
                 assignments.forEach(a => {
                     if (a.elementId === elementId) {
@@ -556,6 +555,7 @@
         }
 
         function getTemplateKey(el) {
+            if (!el) return 'member';
             if (el.templateKey) return el.templateKey;
             if (el.type === 'detachment-command') {
                 return 'detachment-command';
@@ -591,40 +591,43 @@
         //  ROSTER SORTING LOGIC
         // ============================================================
 
-        // Build a map of element name to its order index (from SORT_ORDER)
         function getElementOrderIndex(el) {
             if (!el) return 9999;
             return orderMap[el.name] ?? 9999;
         }
 
-        // Build a map of element ID to its billet template array (role order)
         function getTemplateForElement(el) {
             const key = getTemplateKey(el);
             return BILLET_TEMPLATES[key] || [];
         }
 
-        // Get the role index for a given personnel item within its element's template
-        function getRoleIndex(p, el) {
+        function getRoleIndex(role, el) {
             const template = getTemplateForElement(el);
-            const role = p.role || 'ODST';
             const idx = template.indexOf(role);
             return idx === -1 ? 9999 : idx;
         }
 
-        // Sort personnel: first by element order, then by role order, then by rank order descending
+        // Sort personnel using a primary element and role (derived from first assignment)
         function sortPersonnel(a, b) {
-            const elA = getElement(a.elementId);
-            const elB = getElement(b.elementId);
+            // Determine primary element and role for each person
+            function getPrimary(p) {
+                if (p.assignments && p.assignments.length > 0) {
+                    return { elementId: p.assignments[0].elementId, role: p.assignments[0].role || 'ODST' };
+                }
+                return { elementId: p.elementId, role: p.role || 'ODST' };
+            }
+            const pa = getPrimary(a);
+            const pb = getPrimary(b);
+            const elA = getElement(pa.elementId);
+            const elB = getElement(pb.elementId);
             const orderA = getElementOrderIndex(elA);
             const orderB = getElementOrderIndex(elB);
             if (orderA !== orderB) return orderA - orderB;
 
-            // Same element – sort by role order
-            const roleIdxA = getRoleIndex(a, elA);
-            const roleIdxB = getRoleIndex(b, elB);
+            const roleIdxA = getRoleIndex(pa.role, elA);
+            const roleIdxB = getRoleIndex(pb.role, elB);
             if (roleIdxA !== roleIdxB) return roleIdxA - roleIdxB;
 
-            // Same role – sort by rank order descending (higher rank first)
             const rankA = getRank(a.rankId);
             const rankB = getRank(b.rankId);
             return (rankB.order || 999) - (rankA.order || 999);
@@ -698,8 +701,46 @@
         }
 
         function renderRoster() {
-            // Sort personnel using the custom sort function
-            const sorted = [...PERSONNEL].sort(sortPersonnel);
+            // Build effective personnel: each person gets a primary element and role (first assignment or fallback)
+            const effective = PERSONNEL.map(p => {
+                let primary;
+                if (p.assignments && p.assignments.length > 0) {
+                    primary = p.assignments[0];
+                    return {
+                        ...p,
+                        primaryElementId: primary.elementId,
+                        primaryRole: primary.role || 'ODST',
+                        displayElement: getElement(primary.elementId),
+                        displayRole: primary.role || 'ODST'
+                    };
+                } else {
+                    return {
+                        ...p,
+                        primaryElementId: p.elementId,
+                        primaryRole: p.role || 'ODST',
+                        displayElement: getElement(p.elementId),
+                        displayRole: p.role || 'ODST'
+                    };
+                }
+            });
+
+            // Sort by our custom sort logic (uses primaryElementId and primaryRole)
+            effective.sort((a, b) => {
+                // Use the same sort logic but with the primary fields
+                const elA = getElement(a.primaryElementId);
+                const elB = getElement(b.primaryElementId);
+                const orderA = getElementOrderIndex(elA);
+                const orderB = getElementOrderIndex(elB);
+                if (orderA !== orderB) return orderA - orderB;
+
+                const roleIdxA = getRoleIndex(a.primaryRole, elA);
+                const roleIdxB = getRoleIndex(b.primaryRole, elB);
+                if (roleIdxA !== roleIdxB) return roleIdxA - roleIdxB;
+
+                const rankA = getRank(a.rankId);
+                const rankB = getRank(b.rankId);
+                return (rankB.order || 999) - (rankA.order || 999);
+            });
 
             let html = `<table>
                             <thead>
@@ -713,17 +754,17 @@
                             </thead>
                             <tbody>`;
 
-            sorted.forEach(p => {
+            effective.forEach(p => {
                 const rank = getRank(p.rankId);
-                const el = getElement(p.elementId);
-                const sClass = statusClass(p.status);
                 const displayName = formatDisplayName(p.firstName, p.lastName);
+                const unitName = p.displayElement ? p.displayElement.name : '—';
+                const sClass = statusClass(p.status);
                 html += `<tr>
                             <td><span class="rank-badge">${rank.abbreviation}</span></td>
                             <td>${displayName}</td>
                             <td class="${sClass}">${statusLabel(p.status)}</td>
-                            <td>${el ? el.name : '—'}</td>
-                            <td>${p.role || 'ODST'}</td>
+                            <td>${unitName}</td>
+                            <td>${p.displayRole}</td>
                         </tr>`;
             });
 
