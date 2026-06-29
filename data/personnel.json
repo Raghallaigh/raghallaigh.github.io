@@ -7,11 +7,11 @@
         "status": "active",
         "assignments": [
             {
-                "elementID": 0,
+                "elementId": 0,
                 "role": "Hangman"
             },
             {
-                "elementID": 1,
+                "elementId": 1,
                 "role": "CO"
             }
         ],
