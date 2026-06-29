@@ -7,6 +7,10 @@
         "status": "active",
         "assignments": [
             {
+                "elementID": 0,
+                "role": "Hangman"
+            },
+            {
                 "elementID": 1,
                 "role": "CO"
             }
@@ -667,6 +671,14 @@
         "status": "active",
         "assignments": [
             {
+                "elementId": 1,
+                "role": "XO"
+            },
+            {
+                "elementId": 2,
+                "role": "2IC"
+            },
+            {
                 "elementId": 7,
                 "role": "Command"
             }
@@ -937,6 +949,10 @@
         "status": "active",
         "assignments": [
             {
+                "elementId": 11,
+                "role": "Command"
+            },
+            {
                 "elementId": 12,
                 "role": "Flight Lead"
             }
@@ -1057,12 +1073,12 @@
         "status": "active",
         "assignments": [
             {
-                "elementId": 15,
-                "role": "Section Commander"
-            },
-            {
                 "elementId": 1,
                 "role": "Adjutant"
+            },
+            {
+                "elementId": 15,
+                "role": "Section Commander"
             }
         ],
         "enlisted": "2024-11-17",
