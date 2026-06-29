@@ -531,15 +531,26 @@
         }
 
         function getPersonnel(elementId) {
-            return PERSONNEL.filter(p => p.elementId === elementId);
+            return PERSONNEL.filter(p => {
+                if (p.assignments) {
+                    return p.assignments.some(a => a.elementId === elementId);
+                }
+
+                return p.elementId === elementId;
+            });
         }
 
         function getPersonnelByRole(elementId) {
             const grouped = {};
-            PERSONNEL.filter(p => p.elementId === elementId).forEach(p => {
-                const role = p.role || 'ODST';
-                if (!grouped[role]) grouped[role] = [];
-                grouped[role].push(p);
+            PERSONNEL.filter(p => {
+                const assignments = p.assignments ? p.assignments : [{ elementId: p.elementId, role: p.role || 'ODST' }];
+                assignments.forEach(a => {
+                    if (a.elementId === elementId) {
+                        const role = a.role || 'ODST';
+                        if (!grouped[role]) grouped[role] = [];
+                        grouped[role].push(p);
+                    }
+                });
             });
             return grouped;
         }

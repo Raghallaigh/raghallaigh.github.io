@@ -5,8 +5,12 @@
         "firstName": "G",
         "lastName": "Grand",
         "status": "active",
-        "elementId": 1,
-        "role": "CO",
+        "assignments": [
+            {
+                "elementID": 1,
+                "role": "CO"
+            }
+        ],
         "enlisted": "2024-09-10",
         "discordId": "grandgamerlou"
     },
@@ -16,8 +20,12 @@
         "firstName": "A",
         "lastName": "Conqueror",
         "status": "active",
-        "elementId": 1,
-        "role": "XO",
+        "assignments": [
+            {
+                "elementId": 1,
+                "role": "NCOIC"
+            }
+        ],
         "enlisted": "2025-02-11",
         "discordId": "conqueror5555"
     },
@@ -27,8 +35,12 @@
         "firstName": "Pope",
         "lastName": "Raptor",
         "status": "active",
-        "elementId": 0,
-        "role": "Templar Actual",
+        "assignments": [
+            {
+                "elementId": 0,
+                "role": "Templar Actual"
+            }
+        ],
         "enlisted": "2025-01-04",
         "discordId": "glorifiedholyfire"
     },
@@ -38,8 +50,12 @@
         "firstName": "S",
         "lastName": "Cole",
         "status": "active",
-        "elementId": 0,
-        "role": "Templar",
+        "assignments": [
+            {
+                "elementId": 0,
+                "role": "Templar"
+            }
+        ],
         "enlisted": "2026-01-13",
         "discordId": "solar_drifter"
     },
@@ -49,8 +65,12 @@
         "firstName": null,
         "lastName": "Mitchell",
         "status": "active",
-        "elementId": 0,
-        "role": "Templar",
+        "assignments": [
+            {
+                "elementId": 0,
+                "role": "Templar"
+            }
+        ],
         "enlisted": "2026-05-16",
         "discordId": "medicus_247"
     },
@@ -60,8 +80,12 @@
         "firstName": "J",
         "lastName": "Noble",
         "status": "active",
-        "elementId": 2,
-        "role": "Command",
+        "assignments": [
+            {
+                "elementId": 2,
+                "role": "Command"
+            }
+        ],
         "enlisted": "2024-11-08",
         "discordId": "noble1004"
     },
@@ -71,8 +95,12 @@
         "firstName": "M",
         "lastName": "Rags",
         "status": "active",
-        "elementId": 2,
-        "role": "RTO",
+        "assignments": [
+            {
+                "elementId": 2,
+                "role": "RTO"
+            }
+        ],
         "enlisted": "2025-09-21",
         "discordId": "raghallaigh"
     },
@@ -82,8 +110,12 @@
         "firstName": "C",
         "lastName": "Cancha",
         "status": "active",
-        "elementId": 2,
-        "role": "Corpsman",
+        "assignments": [
+            {
+                "elementId": 2,
+                "role": "Corpsman"
+            }
+        ],
         "enlisted": "2025-01-05",
         "discordId": "canchamar"
     },
@@ -93,8 +125,12 @@
         "firstName": "J",
         "lastName": "Legacy",
         "status": "active",
-        "elementId": 0,
-        "role": "Templar",
+        "assignments": [
+            {
+                "elementId": 0,
+                "role": "Templar"
+            }
+        ],
         "enlisted": "2026-05-16",
         "discordId": "whiplash1_1"
     },
@@ -104,8 +140,12 @@
         "firstName": "J",
         "lastName": "Juniper",
         "status": "active",
-        "elementId": 3,
-        "role": "SL",
+        "assignments": [
+            {
+                "elementId": 3,
+                "role": "SL"
+            }
+        ],
         "enlisted": "2024-10-28",
         "discordId": "shadeofjuniper."
     },
@@ -115,8 +155,12 @@
         "firstName": "C",
         "lastName": "Dancer",
         "status": "active",
-        "elementId": 3,
-        "role": "ASL",
+        "assignments": [
+            {
+                "elementId": 3,
+                "role": "ASL"
+            }
+        ],
         "enlisted": "2024-11-16",
         "discordId": "backgrounddancer"
     },
@@ -126,8 +170,12 @@
         "firstName": "R",
         "lastName": "Naomi",
         "status": "active",
-        "elementId": 3,
-        "role": "RTO",
+        "assignments": [
+            {
+                "elementId": 3,
+                "role": "RTO"
+            }
+        ],
         "enlisted": "2026-04-05",
         "discordId": "samikami"
     },
@@ -137,8 +185,12 @@
         "firstName": "J",
         "lastName": "Born",
         "status": "active",
-        "elementId": 3,
-        "role": "ODST",
+        "assignments": [
+            {
+                "elementId": 3,
+                "role": "ODST"
+            }
+        ],
         "enlisted": "2026-04-08",
         "discordId": "borntobealoner"
     },
@@ -148,8 +200,12 @@
         "firstName": "T",
         "lastName": "Willhelm",
         "status": "active",
-        "elementId": 3,
-        "role": "ODST",
+        "assignments": [
+            {
+                "elementId": 3,
+                "role": "ODST"
+            }
+        ],
         "enlisted": "2026-04-19",
         "discordId": "guillume_159"
     },
@@ -159,8 +215,12 @@
         "firstName": null,
         "lastName": "Shoto",
         "status": "active",
-        "elementId": 3,
-        "role": "Corpsman",
+        "assignments": [
+            {
+                "elementId": 3,
+                "role": "Corpsman"
+            }
+        ],
         "enlisted": "2025-09-17",
         "discordId": "shoto8396"
     },
@@ -170,8 +230,12 @@
         "firstName": "R",
         "lastName": "Alice",
         "status": "active",
-        "elementId": 3,
-        "role": "Corpsman",
+        "assignments": [
+            {
+                "elementId": 3,
+                "role": "Corpsman"
+            }
+        ],
         "enlisted": "2026-04-08",
         "discordId": "aliceisalone"
     },
@@ -181,8 +245,12 @@
         "firstName": "B",
         "lastName": "BMO",
         "status": "active",
-        "elementId": 4,
-        "role": "SL",
+        "assignments": [
+            {
+                "elementId": 4,
+                "role": "SL"
+            }
+        ],
         "enlisted": "2024-11-16",
         "discordId": "bmo070544"
     },
@@ -192,8 +260,12 @@
         "firstName": "J",
         "lastName": "Jo",
         "status": "active",
-        "elementId": 4,
-        "role": "ASL",
+        "assignments": [
+            {
+                "elementId": 4,
+                "role": "ASL"
+            }
+        ],
         "enlisted": "2024-11-16",
         "discordId": "vokkun"
     },
@@ -203,8 +275,12 @@
         "firstName": "G",
         "lastName": "Gossard",
         "status": "active",
-        "elementId": 4,
-        "role": "ODST",
+        "assignments": [
+            {
+                "elementId": 4,
+                "role": "ODST"
+            }
+        ],
         "enlisted": "2024-11-16",
         "discordId": "gossard"
     },
@@ -214,8 +290,12 @@
         "firstName": "T",
         "lastName": "Damberg",
         "status": "active",
-        "elementId": 4,
-        "role": "ODST",
+        "assignments": [
+            {
+                "elementId": 4,
+                "role": "ODST"
+            }
+        ],
         "enlisted": "2025-01-14",
         "discordId": "damberg1"
     },
@@ -225,8 +305,12 @@
         "firstName": "J",
         "lastName": "Anselm",
         "status": "active",
-        "elementId": 4,
-        "role": "ODST",
+        "assignments": [
+            {
+                "elementId": 4,
+                "role": "ODST"
+            }
+        ],
         "enlisted": "2025-11-29",
         "discordId": "es177"
     },
@@ -236,8 +320,12 @@
         "firstName": "A",
         "lastName": "Reepper",
         "status": "active",
-        "elementId": 4,
-        "role": "ODST",
+        "assignments": [
+            {
+                "elementId": 4,
+                "role": "ODST"
+            }
+        ],
         "enlisted": "2025-12-26",
         "discordId": "reepper."
     },
@@ -247,8 +335,12 @@
         "firstName": "K",
         "lastName": "Kev",
         "status": "active",
-        "elementId": 4,
-        "role": "ODST",
+        "assignments": [
+            {
+                "elementId": 4,
+                "role": "ODST"
+            }
+        ],
         "enlisted": "2026-02-02",
         "discordId": "sponks99"
     },
@@ -258,8 +350,12 @@
         "firstName": "A",
         "lastName": "Howells",
         "status": "active",
-        "elementId": 4,
-        "role": "Corpsman",
+        "assignments": [
+            {
+                "elementId": 4,
+                "role": "Corpsman"
+            }
+        ],
         "enlisted": "2025-12-26",
         "discordId": "lenooccar"
     },
@@ -269,8 +365,12 @@
         "firstName": "L",
         "lastName": "Lemo",
         "status": "active",
-        "elementId": 4,
-        "role": "Corpsman",
+        "assignments": [
+            {
+                "elementId": 4,
+                "role": "Corpsman"
+            }
+        ],
         "enlisted": "2026-01-05",
         "discordId": "lemo"
     },
@@ -280,8 +380,12 @@
         "firstName": null,
         "lastName": "Lumine",
         "status": "active",
-        "elementId": 5,
-        "role": "ASL",
+        "assignments": [
+            {
+                "elementId": 5,
+                "role": "ASL"
+            }
+        ],
         "enlisted": "2026-01-12",
         "discordId": "lumine_exile"
     },
@@ -291,8 +395,12 @@
         "firstName": "G",
         "lastName": "Leif",
         "status": "active",
-        "elementId": 5,
-        "role": "RTO",
+        "assignments": [
+            {
+                "elementId": 5,
+                "role": "RTO"
+            }
+        ],
         "enlisted": "2025-11-20",
         "discordId": "leifericsonlegit"
     },
@@ -302,8 +410,12 @@
         "firstName": "C",
         "lastName": "Travis",
         "status": "active",
-        "elementId": 5,
-        "role": "ODST",
+        "assignments": [
+            {
+                "elementId": 5,
+                "role": "ODST"
+            }
+        ],
         "enlisted": "2025-04-20",
         "discordId": "travis6779"
     },
@@ -313,8 +425,12 @@
         "firstName": "L",
         "lastName": "Church",
         "status": "active",
-        "elementId": 5,
-        "role": "ODST",
+        "assignments": [
+            {
+                "elementId": 5,
+                "role": "ODST"
+            }
+        ],
         "enlisted": "2025-10-24",
         "discordId": "church9199"
     },
@@ -324,8 +440,12 @@
         "firstName": "S",
         "lastName": "Ouroboros",
         "status": "active",
-        "elementId": 5,
-        "role": "ODST",
+        "assignments": [
+            {
+                "elementId": 5,
+                "role": "ODST"
+            }
+        ],
         "enlisted": "2026-03-23",
         "discordId": "eviltaptap"
     },
@@ -335,8 +455,12 @@
         "firstName": null,
         "lastName": "Jojo",
         "status": "active",
-        "elementId": 5,
-        "role": "ODST",
+        "assignments": [
+            {
+                "elementId": 5,
+                "role": "ODST"
+            }
+        ],
         "enlisted": "2026-05-12",
         "discordId": "kinora"
     },
@@ -346,8 +470,12 @@
         "firstName": "A",
         "lastName": "Panzer",
         "status": "active",
-        "elementId": 5,
-        "role": "ODST",
+        "assignments": [
+            {
+                "elementId": 5,
+                "role": "ODST"
+            }
+        ],
         "enlisted": "2026-06-07",
         "discordId": "americanpanzer1941"
     },
@@ -357,8 +485,12 @@
         "firstName": "N",
         "lastName": "Koszmar",
         "status": "active",
-        "elementId": 5,
-        "role": "Corpsman",
+        "assignments": [
+            {
+                "elementId": 5,
+                "role": "Corpsman"
+            }
+        ],
         "enlisted": "2025-10-14",
         "discordId": "thekoszmar"
     },
@@ -368,8 +500,12 @@
         "firstName": "A",
         "lastName": "Tyrant",
         "status": "active",
-        "elementId": 5,
-        "role": "Corpsman",
+        "assignments": [
+            {
+                "elementId": 5,
+                "role": "Corpsman"
+            }
+        ],
         "enlisted": "2026-01-19",
         "discordId": "codenametyrant"
     },
@@ -379,8 +515,12 @@
         "firstName": "J",
         "lastName": "Wolf",
         "status": "active",
-        "elementId": 6,
-        "role": "SL",
+        "assignments": [
+            {
+                "elementId": 6,
+                "role": "SL"
+            }
+        ],
         "enlisted": "2025-03-31",
         "discordId": "jakko6969"
     },
@@ -390,8 +530,12 @@
         "firstName": "S",
         "lastName": "Sparkie",
         "status": "active",
-        "elementId": 6,
-        "role": "ASL",
+        "assignments": [
+            {
+                "elementId": 6,
+                "role": "ASL"
+            }
+        ],
         "enlisted": "2025-12-17",
         "discordId": "valvarock"
     },
@@ -401,8 +545,12 @@
         "firstName": "J",
         "lastName": "Jimothee",
         "status": "active",
-        "elementId": 6,
-        "role": "RTO",
+        "assignments": [
+            {
+                "elementId": 6,
+                "role": "RTO"
+            }
+        ],
         "enlisted": "2026-05-18",
         "discordId": "jimotheejalamet"
     },
@@ -412,8 +560,12 @@
         "firstName": "C",
         "lastName": "Charlie",
         "status": "active",
-        "elementId": 6,
-        "role": "ODST",
+        "assignments": [
+            {
+                "elementId": 6,
+                "role": "ODST"
+            }
+        ],
         "enlisted": "2025-12-22",
         "discordId": "mrilovegaming11"
     },
@@ -423,8 +575,12 @@
         "firstName": null,
         "lastName": "Tech",
         "status": "active",
-        "elementId": 6,
-        "role": "ODST",
+        "assignments": [
+            {
+                "elementId": 6,
+                "role": "ODST"
+            }
+        ],
         "enlisted": "2026-02-18",
         "discordId": "tech1224"
     },
@@ -434,8 +590,12 @@
         "firstName": "T",
         "lastName": "Elusive",
         "status": "active",
-        "elementId": 6,
-        "role": "ODST",
+        "assignments": [
+            {
+                "elementId": 6,
+                "role": "ODST"
+            }
+        ],
         "enlisted": "2026-03-28",
         "discordId": "elusive8796"
     },
@@ -445,8 +605,12 @@
         "firstName": "R",
         "lastName": "Phoenix",
         "status": "active",
-        "elementId": 6,
-        "role": "ODST",
+        "assignments": [
+            {
+                "elementId": 6,
+                "role": "ODST"
+            }
+        ],
         "enlisted": "2026-03-30",
         "discordId": "russianphoenix"
     },
@@ -456,8 +620,12 @@
         "firstName": null,
         "lastName": "Vox",
         "status": "active",
-        "elementId": 6,
-        "role": "ODST",
+        "assignments": [
+            {
+                "elementId": 6,
+                "role": "ODST"
+            }
+        ],
         "enlisted": "2026-04-29",
         "discordId": "pumpkivox"
     },
@@ -467,8 +635,12 @@
         "firstName": "G",
         "lastName": "Watcher",
         "status": "active",
-        "elementId":6,
-        "role": "ODST",
+        "assignments": [
+            {
+                "elementId": 6,
+                "role": "ODST"
+            }
+        ],
         "enlisted": "2026-05-17",
         "discordId": "portzz"
     },
@@ -478,8 +650,12 @@
         "firstName": "H",
         "lastName": "Toothless",
         "status": "active",
-        "elementId": 6,
-        "role": "Corpsman",
+        "assignments": [
+            {
+                "elementId": 6,
+                "role": "Corpsman"
+            }
+        ],
         "enlisted": "2026-02-09",
         "discordId": "faded_shadow666"
     },
@@ -489,8 +665,12 @@
         "firstName": "D",
         "lastName": "Skortch",
         "status": "active",
-        "elementId": 7,
-        "role": "Command",
+        "assignments": [
+            {
+                "elementId": 7,
+                "role": "Command"
+            }
+        ],
         "enlisted": "2024-11-16",
         "discordId": "skortch48"
     },
@@ -500,8 +680,12 @@
         "firstName": "T",
         "lastName": "TX",
         "status": "active",
-        "elementId": 7,
-        "role": "RTO",
+        "assignments": [
+            {
+                "elementId": 7,
+                "role": "RTO"
+            }
+        ],
         "enlisted": "2025-04-28",
         "discordId": "tx957"
     },
@@ -511,8 +695,12 @@
         "firstName": "O",
         "lastName": "Luna",
         "status": "active",
-        "elementId": 7,
-        "role": "Corpsman",
+        "assignments": [
+            {
+                "elementId": 7,
+                "role": "Corpsman"
+            }
+        ],
         "enlisted": "2025-08-20",
         "discordId": "ct7934strontium"
     },
@@ -522,8 +710,12 @@
         "firstName": "K",
         "lastName": "Dragen",
         "status": "active",
-        "elementId": 8,
-        "role": "SL",
+        "assignments": [
+            {
+                "elementId": 8,
+                "role": "SL"
+            }
+        ],
         "enlisted": "2025-09-22",
         "discordId": "dragenking22"
     },
@@ -533,8 +725,12 @@
         "firstName": "V",
         "lastName": "Ram",
         "status": "active",
-        "elementId": 8,
-        "role": "ASL",
+        "assignments": [
+            {
+                "elementId": 8,
+                "role": "ASL"
+            }
+        ],
         "enlisted": "2025-11-27",
         "discordId": "ram1down"
     },
@@ -544,8 +740,12 @@
         "firstName": "G",
         "lastName": "Frogo",
         "status": "active",
-        "elementId": 8,
-        "role": "ODST",
+        "assignments": [
+            {
+                "elementId": 8,
+                "role": "ODST"
+            }
+        ],
         "enlisted": "2026-05-09",
         "discordId": "frogger865"
     },
@@ -555,8 +755,12 @@
         "firstName": "J",
         "lastName": "April",
         "status": "active",
-        "elementId": 8,
-        "role": "Corpsman",
+        "assignments": [
+            {
+                "elementId": 8,
+                "role": "Corpsman"
+            }
+        ],
         "enlisted": "2026-05-09",
         "discordId": "avril_blackwater"
     },
@@ -566,8 +770,12 @@
         "firstName": "D",
         "lastName": "Ghost",
         "status": "active",
-        "elementId": 9,
-        "role": "SL",
+        "assignments": [
+            {
+                "elementId": 9,
+                "role": "SL"
+            }
+        ],
         "enlisted": "2024-12-02",
         "discordId": ".ezri"
     },
@@ -577,8 +785,12 @@
         "firstName": "M",
         "lastName": "Conrad",
         "status": "active",
-        "elementId": 9,
-        "role": "ASL",
+        "assignments": [
+            {
+                "elementId": 9,
+                "role": "ASL"
+            }
+        ],
         "enlisted": "2026-02-23",
         "discordId": "ghostxconrad"
     },
@@ -588,8 +800,12 @@
         "firstName": null,
         "lastName": "Cupid",
         "status": "active",
-        "elementId": 9,
-        "role": "RTO",
+        "assignments": [
+            {
+                "elementId": 9,
+                "role": "RTO"
+            }
+        ],
         "enlisted": "2024-11-11",
         "discordId": "cupidgaming"
     },
@@ -599,8 +815,12 @@
         "firstName": null,
         "lastName": "Dredge",
         "status": "active",
-        "elementId": 9,
-        "role": "ODST",
+        "assignments": [
+            {
+                "elementId": 9,
+                "role": "ODST"
+            }
+        ],
         "enlisted": "2025-10-05",
         "discordId": "titan7328"
     },
@@ -610,8 +830,12 @@
         "firstName": null,
         "lastName": "Jr. James",
         "status": "active",
-        "elementId": 9,
-        "role": "ODST",
+        "assignments": [
+            {
+                "elementId": 9,
+                "role": "ODST"
+            }
+        ],
         "enlisted": "2026-02-18",
         "discordId": "progamer235664"
     },
@@ -621,8 +845,12 @@
         "firstName": "B",
         "lastName": "Liquid",
         "status": "active",
-        "elementId": 9,
-        "role": "ODST",
+        "assignments": [
+            {
+                "elementId": 9,
+                "role": "ODST"
+            }
+        ],
         "enlisted": "2026-02-19",
         "discordId": "theblackliquid"
     },
@@ -632,8 +860,12 @@
         "firstName": "T",
         "lastName": "Storm",
         "status": "active",
-        "elementId": 9,
-        "role": "ODST",
+        "assignments": [
+            {
+                "elementId": 9,
+                "role": "ODST"
+            }
+        ],
         "enlisted": "2026-05-02",
         "discordId": "draconicseamstress"
     },
@@ -642,9 +874,13 @@
         "rankId": 2,
         "firstName": null,
         "lastName": "Artyom",
-        "status": "active",
-        "elementId": 9,
-        "role": "ODST",
+        "assignments": [
+            {
+                "status": "active",
+                "elementId": 9,
+                "role": "ODST"
+            }
+        ],
         "enlisted": "2026-05-14",
         "discordId": "scorpion_hellhound"
     },
@@ -654,8 +890,12 @@
         "firstName": "W",
         "lastName": "Wren",
         "status": "active",
-        "elementId": 9,
-        "role": "ODST",
+        "assignments": [
+            {
+                "elementId": 9,
+                "role": "ODST"
+            }
+        ],
         "enlisted": "2026-06-18",
         "discordId": "wr33ny"
     },
@@ -665,8 +905,12 @@
         "firstName": "T",
         "lastName": "Ascanius",
         "status": "active",
-        "elementId": 9,
-        "role": "Corpsman",
+        "assignments": [
+            {
+                "elementId": 9,
+                "role": "Corpsman"
+            }
+        ],
         "enlisted": "2024-11-27",
         "discordId": "armahawk"
     },
@@ -676,8 +920,12 @@
         "firstName": "H",
         "lastName": "Savi&#263;",
         "status": "active",
-        "elementId": 9,
-        "role": "Corpsman",
+        "assignments": [
+            {
+                "elementId": 9,
+                "role": "Corpsman"
+            }
+        ],
         "enlisted": "2026-01-20",
         "discordId": "haleyfromthe53rd"
     },
@@ -687,8 +935,12 @@
         "firstName": "P",
         "lastName": "Hydra",
         "status": "active",
-        "elementId": 12,
-        "role": "Flight Lead",
+        "assignments": [
+            {
+                "elementId": 12,
+                "role": "Flight Lead"
+            }
+        ],
         "enlisted": "2024-09-15",
         "discordId": "purple_hydra"
     },
@@ -698,8 +950,12 @@
         "firstName": "W",
         "lastName": "Weste",
         "status": "active",
-        "elementId": 12,
-        "role": "Flight 2IC",
+        "assignments": [
+            {
+                "elementId": 12,
+                "role": "Flight 2IC"
+            }
+        ],
         "enlisted": "2024-11-12",
         "discordId": "westernpilot26"
     },
@@ -709,8 +965,12 @@
         "firstName": null,
         "lastName": "Raven",
         "status": "active",
-        "elementId": 13,
-        "role": "Flight 2IC",
+        "assignments": [
+            {
+                "elementId": 13,
+                "role": "Flight 2IC"
+            }
+        ],
         "enlisted": "2026-01-29",
         "discordId": "raven_she_her"
     },
@@ -720,8 +980,12 @@
         "firstName": "D",
         "lastName": "Rocky",
         "status": "active",
-        "elementId": 12,
-        "role": "Aviator",
+        "assignments": [
+            {
+                "elementId": 12,
+                "role": "Aviator"
+            }
+        ],
         "enlisted": "2025-08-04",
         "discordId": "jackt2210"
     },
@@ -731,8 +995,12 @@
         "firstName": "S",
         "lastName": "Skarin",
         "status": "active",
-        "elementId": 12,
-        "role": "Aviator",
+        "assignments": [
+            {
+                "elementId": 12,
+                "role": "Aviator"
+            }
+        ],
         "enlisted": "2026-01-18",
         "discordId": "skarin4484"
     },
@@ -742,8 +1010,12 @@
         "firstName": null,
         "lastName": "Luc",
         "status": "active",
-        "elementId": 13,
-        "role": "Aviator",
+        "assignments": [
+            {
+                "elementId": 13,
+                "role": "Aviator"
+            }
+        ],
         "enlisted": "2025-12-29",
         "discordId": "luc234866"
     },
@@ -753,8 +1025,12 @@
         "firstName": "A",
         "lastName": "Firebird",
         "status": "active",
-        "elementId": 13,
-        "role": "Aviator",
+        "assignments": [
+            {
+                "elementId": 13,
+                "role": "Aviator"
+            }
+        ],
         "enlisted": "2026-04-17",
         "discordId": "reaper_885"
     },
@@ -764,8 +1040,12 @@
         "firstName": null,
         "lastName": "Sig",
         "status": "active",
-        "elementId": 14,
-        "role": "Command",
+        "assignments": [
+            {
+                "elementId": 14,
+                "role": "Command"
+            }
+        ],
         "enlisted": "2024-11-11",
         "discordId": "makotheshark"
     },
@@ -775,8 +1055,16 @@
         "firstName": "C",
         "lastName": "Jewel",
         "status": "active",
-        "elementId": 15,
-        "role": "Section Commander",
+        "assignments": [
+            {
+                "elementId": 15,
+                "role": "Section Commander"
+            },
+            {
+                "elementId": 1,
+                "role": "Adjutant"
+            }
+        ],
         "enlisted": "2024-11-17",
         "discordId": "__k1"
     },
@@ -786,8 +1074,12 @@
         "firstName": "Y",
         "lastName": "Dadecoy",
         "status": "active",
-        "elementId": 16,
-        "role": "Section Commander",
+        "assignments": [
+            {
+                "elementId": 16,
+                "role": "Section Commander"
+            }
+        ],
         "enlisted": "2025-03-03",
         "discordId": "csm_dadecoy"
     },
@@ -797,8 +1089,12 @@
         "firstName": null,
         "lastName": "Monarch",
         "status": "active",
-        "elementId": 16,
-        "role": "Sr Engineer",
+        "assignments": [
+            {
+                "elementId": 16,
+                "role": "Sr Engineer"
+            }
+        ],
         "enlisted": "2024-11-11",
         "discordId": "kilesov117"
     },
@@ -808,8 +1104,12 @@
         "firstName": "J",
         "lastName": "Grizz",
         "status": "active",
-        "elementId": 15,
-        "role": "Engineer",
+        "assignments": [
+            {
+                "elementId": 15,
+                "role": "Engineer"
+            }
+        ],
         "enlisted": "2024-09-15",
         "discordId": "grizzlymite73"
     },
@@ -819,8 +1119,12 @@
         "firstName": null,
         "lastName": "Cash",
         "status": "active",
-        "elementId": 16,
-        "role": "Engineer",
+        "assignments": [
+            {
+                "elementId": 16,
+                "role": "Engineer"
+            }
+        ],
         "enlisted": "2025-04-01",
         "discordId": "c45c45"
     },
@@ -830,8 +1134,12 @@
         "firstName": null,
         "lastName": "Bonewheel",
         "status": "active",
-        "elementId": 18,
-        "role": "SL",
+        "assignments": [
+            {
+                "elementId": 18,
+                "role": "SL"
+            }
+        ],
         "enlisted": "2024-11-11",
         "discordId": "bonewheelthe3rd"
     },
@@ -841,8 +1149,12 @@
         "firstName": "R",
         "lastName": "Witte",
         "status": "active",
-        "elementId": 18,
-        "role": "ASL",
+        "assignments": [
+            {
+                "elementId": 18,
+                "role": "ASL"
+            }
+        ],
         "enlisted": "2025-05-13",
         "discordId": "blobfish4713"
     },
@@ -852,8 +1164,12 @@
         "firstName": null,
         "lastName": "Cola",
         "status": "active",
-        "elementId": 18,
-        "role": "Medic ODST",
+        "assignments": [
+            {
+                "elementId": 18,
+                "role": "Medic ODST"
+            }
+        ],
         "enlisted": "2024-11-11",
         "discordId": "cola7973"
     },
@@ -863,8 +1179,12 @@
         "firstName": null,
         "lastName": "Desk",
         "status": "active",
-        "elementId": 18,
-        "role": "Corpsman",
+        "assignments": [
+            {
+                "elementId": 18,
+                "role": "Corpsman"
+            }
+        ],
         "enlisted": "2024-11-11",
         "discordId": "itzadesk"
     },
@@ -874,8 +1194,12 @@
         "firstName": "A",
         "lastName": "Owliette",
         "status": "active",
-        "elementId": 18,
-        "role": "Corpsman",
+        "assignments": [
+            {
+                "elementId": 18,
+                "role": "Corpsman"
+            }
+        ],
         "enlisted": "2026-02-04",
         "discordId": "owliettee"
     }
