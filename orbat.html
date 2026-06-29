@@ -530,21 +530,28 @@
             return ELEMENTS.find(e => e.id === id);
         }
 
+        // Returns all personnel who have an assignment in the given element,
+        // regardless of whether they use the old single‑assignment or new multi‑assignment format.
         function getPersonnel(elementId) {
             return PERSONNEL.filter(p => {
+                // If the person has an assignments array, check each assignment.
                 if (p.assignments) {
-                    return p.assignments.some(a => a.elementId === elementId);
+                    return p.assignments.some(a => Number(a.elementId) === Number(elementId));
                 }
-                return p.elementId === elementId;
+                // Fallback: single assignment stored directly on the person.
+                return Number(p.elementId) === Number(elementId);
             });
         }
 
+        // Groups personnel by role for a given element, handling multi‑assignments.
         function getPersonnelByRole(elementId) {
             const grouped = {};
             PERSONNEL.forEach(p => {
+                // Build a list of assignments for this person.
                 const assignments = p.assignments ? p.assignments : [{ elementId: p.elementId, role: p.role || 'ODST' }];
                 assignments.forEach(a => {
-                    if (a.elementId === elementId) {
+                    // Use Number() to avoid type mismatches (string vs number).
+                    if (Number(a.elementId) === Number(elementId)) {
                         const role = a.role || 'ODST';
                         if (!grouped[role]) grouped[role] = [];
                         grouped[role].push(p);
@@ -605,32 +612,6 @@
             const template = getTemplateForElement(el);
             const idx = template.indexOf(role);
             return idx === -1 ? 9999 : idx;
-        }
-
-        // Sort personnel using a primary element and role (derived from first assignment)
-        function sortPersonnel(a, b) {
-            // Determine primary element and role for each person
-            function getPrimary(p) {
-                if (p.assignments && p.assignments.length > 0) {
-                    return { elementId: p.assignments[0].elementId, role: p.assignments[0].role || 'ODST' };
-                }
-                return { elementId: p.elementId, role: p.role || 'ODST' };
-            }
-            const pa = getPrimary(a);
-            const pb = getPrimary(b);
-            const elA = getElement(pa.elementId);
-            const elB = getElement(pb.elementId);
-            const orderA = getElementOrderIndex(elA);
-            const orderB = getElementOrderIndex(elB);
-            if (orderA !== orderB) return orderA - orderB;
-
-            const roleIdxA = getRoleIndex(pa.role, elA);
-            const roleIdxB = getRoleIndex(pb.role, elB);
-            if (roleIdxA !== roleIdxB) return roleIdxA - roleIdxB;
-
-            const rankA = getRank(a.rankId);
-            const rankB = getRank(b.rankId);
-            return (rankB.order || 999) - (rankA.order || 999);
         }
 
         // ============================================================
@@ -724,9 +705,8 @@
                 }
             });
 
-            // Sort by our custom sort logic (uses primaryElementId and primaryRole)
+            // Sort by custom order
             effective.sort((a, b) => {
-                // Use the same sort logic but with the primary fields
                 const elA = getElement(a.primaryElementId);
                 const elB = getElement(b.primaryElementId);
                 const orderA = getElementOrderIndex(elA);
@@ -825,6 +805,29 @@
                 RANKS = await ranksRes.json();
                 ELEMENTS = await elementsRes.json();
                 PERSONNEL = await personnelRes.json();
+
+                // Normalise assignment keys: ensure every assignment uses "elementId" (camelCase)
+                // Also ensure elementId is a number (convert from string if needed)
+                PERSONNEL.forEach(p => {
+                    if (p.assignments) {
+                        p.assignments = p.assignments.map(a => {
+                            // If the assignment has "elementID" (capital D) but not "elementId", copy it over
+                            if (a.elementID !== undefined && a.elementId === undefined) {
+                                a.elementId = a.elementID;
+                                delete a.elementID;
+                            }
+                            // Ensure elementId is a number
+                            a.elementId = Number(a.elementId);
+                            // Ensure role exists
+                            if (!a.role) a.role = 'ODST';
+                            return a;
+                        });
+                    }
+                    // Also ensure the fallback elementId is a number
+                    if (p.elementId !== undefined) {
+                        p.elementId = Number(p.elementId);
+                    }
+                });
 
                 render();
             } catch (error) {
