@@ -886,6 +886,7 @@
         "rankId": 2,
         "firstName": null,
         "lastName": "Artyom",
+        "status": "active",
         "assignments": [
             {
                 "status": "active",
